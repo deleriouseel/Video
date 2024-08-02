@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Device Controller</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        color: darkslategray;
+        font-size: 16px;
+        cursor: pointer;
+        margin-right: 10px;
+        border-radius: 5px;
+      }
+
+      .green-button {
+        background-color: green;
+        color: whitesmoke;
+      }
+
+      .red-button {
+        background-color: red;
+        color: whitesmoke;
+      }
+      .blue-button {
+        background-color: lightskyblue;
+      }
+
+      #encoder1Status,
+      #getStatus,
+      #inputStatus {
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+      #inputStatus {
+        white-space: pre-wrap;
+      }
+    </style>
+    <script>
+      function sendStartEncoder1() {
+        fetch("MonarchHDX/start_encoder1.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("encoder1Status").innerText =
+              "Encoder1 Start:  " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function sendStopEncoder1() {
+        fetch("MonarchHDX/stop_encoder1.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("encoder1Status").innerText =
+              "Encoder1 Stop: " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function getInputStatus() {
+        fetch("MonarchHDX/get_input_status.php")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("inputStatus").innerText =
+              "Input Status: " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function getStatus() {
+        fetch("/MonarchHDX/get_status.php")
+          .then((response) => response.json())
+          .then((data) => {
+            // Format the response to display each encoder status on a new line
+            const formattedStatus = data.status
+              .replace(/ENC1:/g, "\nENC1:")
+              .replace(/ENC2:/g, "\nENC2:")
+              .replace(/NAME:/g, "\nNAME:");
+            document.getElementById("getStatus").innerText =
+              "Status:" + formattedStatus;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function executeCommand() {
+        fetch("/WERDS/send.php")
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById(
+              "output"
+            ).innerText = `Status: ${data.status}\nOutput:\n${data.output}`;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("output").innerText =
+              "Error executing command.";
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Monarch HDX Controller</h2>
+    <button onclick="getStatus()">Get Status</button>
+    <p id="getStatus">Status: N/A</p>
+
+    <button onclick="getInputStatus()">Get Input Status</button>
+    <p id="inputStatus">Input Status: N/A</p>
+
+    <button class="green-button" onclick="sendStartEncoder1()">
+      Start Encoder1
+    </button>
+    <button class="red-button" onclick="sendStopEncoder1()">
+      Stop Encoder1
+    </button>
+    <p id="encoder1Status">Encoder1 Status: N/A</p>
+
+    <h2>WERDS Controller</h2>
+    <button onclick="send(chromium-check)">Browser Status</button>
+    <p id="chromeCheck">Status: N/A</p>
+
+    <button class="blue-button" onclick="eff5()">Refresh Browser</button>
+    <p id="eff5">Status: N/A</p>
+
+    <button class="red-button" onclick="stopChromium()">Stop Browser</button>
+    <button class="green-button" onclick="startChromium()">
+      Start Browser
+    </button>
+    <p id="chromiumStatus">Status: N/A</p>
+  </body>
+</html>
