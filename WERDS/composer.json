@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpseclib/phpseclib": "^3.0",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
