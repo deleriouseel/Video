@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Controller</title>
+    <title>Video Device Controllers</title>
     <style>
       body {
         font-family: Arial, sans-serif;
         margin: 20px;
+      }
+
+      div {
+        padding: 10px 0px;
       }
 
       button {
@@ -32,6 +36,8 @@
       }
 
       #encoder1Status,
+      #encoder2Status,
+      #bothEncoderStatus,
       #getStatus,
       #inputStatus {
         margin-top: 10px;
@@ -43,6 +49,26 @@
       }
     </style>
     <script>
+      //Matrox commands
+      function sendStartBoth() {
+        fetch("MonarchHDX/start_both.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("bothEncoderStatus").innerText =
+              "Both Encoders Started:  " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+      function sendStopBoth() {
+        fetch("MonarchHDX/stop_both.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("bothEncoderStatus").innerText =
+              "Both Encoders Stopped:  " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
       function sendStartEncoder1() {
         fetch("MonarchHDX/start_encoder1.php", { method: "POST" })
           .then((response) => response.json())
@@ -53,12 +79,32 @@
           .catch((error) => console.error("Error:", error));
       }
 
+      function sendStartEncoder2() {
+        fetch("MonarchHDX/start_encoder2.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("encoder2Status").innerText =
+              "Encoder2 Start:  " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
       function sendStopEncoder1() {
         fetch("MonarchHDX/stop_encoder1.php", { method: "POST" })
           .then((response) => response.json())
           .then((data) => {
             document.getElementById("encoder1Status").innerText =
               "Encoder1 Stop: " + data.status;
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function sendStopEncoder2() {
+        fetch("MonarchHDX/stop_encoder2.php", { method: "POST" })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("encoder2Status").innerText =
+              "Encoder2 Stop: " + data.status;
           })
           .catch((error) => console.error("Error:", error));
       }
@@ -87,14 +133,22 @@
           })
           .catch((error) => console.error("Error:", error));
       }
+      //WERDS function
+      function sendCommand(command) {
+        // Create a FormData object to hold the command data
+        const formData = new FormData();
+        formData.append("command", command);
 
-      function executeCommand() {
-        fetch("/WERDS/send.php")
+        fetch("/WERDS/pi_commands.php", {
+          method: "POST", // Use POST method
+          body: formData, // Send the command in the request body
+        })
           .then((response) => response.json())
           .then((data) => {
+            // Update the output element with the response data
             document.getElementById(
               "output"
-            ).innerText = `Status: ${data.status}\nOutput:\n${data.output}`;
+            ).innerText = `Status: ${data.status}\nOutput: ${data.stdout}`;
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -105,32 +159,58 @@
     </script>
   </head>
   <body>
-    <h2>Monarch HDX Controller</h2>
-    <button onclick="getStatus()">Get Status</button>
-    <p id="getStatus">Status: N/A</p>
+    <div id="monarch">
+      <h2>Monarch HDX Controller</h2>
+      <button onclick="getStatus()">Get Status</button>
+      <p id="getStatus">Status:</p>
 
-    <button onclick="getInputStatus()">Get Input Status</button>
-    <p id="inputStatus">Input Status: N/A</p>
+      <button onclick="getInputStatus()">Get Input Status</button>
+      <p id="inputStatus">Input Status:</p>
 
-    <button class="green-button" onclick="sendStartEncoder1()">
-      Start Encoder1
-    </button>
-    <button class="red-button" onclick="sendStopEncoder1()">
-      Stop Encoder1
-    </button>
-    <p id="encoder1Status">Encoder1 Status: N/A</p>
+      <h3>Streaming</h3>
 
-    <h2>WERDS Controller</h2>
-    <button onclick="send(chromium-check)">Browser Status</button>
-    <p id="chromeCheck">Status: N/A</p>
+      <button class="green-button" onclick="sendStartBoth()">
+        Start Streaming/Recording
+      </button>
+      <button class="red-button" onclick="sendStopBoth()">
+        Stop Streaming/Recording
+      </button>
+      <p id="bothEncoderStatus">Both Encoder Status:</p>
 
-    <button class="blue-button" onclick="eff5()">Refresh Browser</button>
-    <p id="eff5">Status: N/A</p>
+      <hr style="width: 15%; text-align: left; margin-left: 0" />
 
-    <button class="red-button" onclick="stopChromium()">Stop Browser</button>
-    <button class="green-button" onclick="startChromium()">
-      Start Browser
-    </button>
-    <p id="chromiumStatus">Status: N/A</p>
+      <button class="green-button" onclick="sendStartEncoder1()">
+        Start Streaming
+      </button>
+      <button class="red-button" onclick="sendStopEncoder1()">
+        Stop Streaming
+      </button>
+      <p id="encoder1Status">Encoder1 Status:</p>
+
+      <button class="green-button" onclick="sendStartEncoder2()">
+        Start Recording
+      </button>
+      <button class="red-button" onclick="sendStopEncoder2()">
+        Stop Recording
+      </button>
+      <p id="encoder2Status">Encoder2 Status:</p>
+    </div>
+    <hr />
+    <div id="werds">
+      <h2>WERDS Controller</h2>
+      <button onclick="sendCommand('chromium-check')">Browser Status</button>
+
+      <button class="blue-button" onclick="sendCommand('eff5')">
+        Refresh Browser
+      </button>
+
+      <button class="red-button" onclick="sendCommand('stop-chromium')">
+        Stop Chromium
+      </button>
+      <button class="green-button" onclick="sendCommand('start-chromium')">
+        Start Chromium
+      </button>
+      <p id="output">Status: Unknown</p>
+    </div>
   </body>
 </html>
