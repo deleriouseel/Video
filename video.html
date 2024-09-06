@@ -35,6 +35,11 @@
         background-color: lightskyblue;
       }
 
+      #ip {
+        float: right;
+        padding: 10px 20%;
+      }
+
       #encoder1Status,
       #encoder2Status,
       #bothEncoderStatus,
@@ -159,6 +164,20 @@
     </script>
   </head>
   <body>
+    <div id="ip">
+      <h2>IP Addresses</h2>
+      <p>10.10.20.20 - Matrox Monarch</p>
+      <p>10.10.20.21 - Atomos Studio Samurai</p>
+      <p>10.10.20.22 - Ross Matrix</p>
+      <p>10.10.20.23 - Ross Carbonite Switcher</p>
+      <p>10.10.20.24 - Ross Carbonite Controller</p>
+
+      <p>10.10.20.40 - Camera 1</p>
+      <p>10.10.20.41 - Camera 2</p>
+      <p>10.10.20.42 - Camera 3</p>
+      <p>10.10.20.43 - Camera 4</p>
+      <p>10.10.20.45 - Camera Controller</p>
+    </div>
     <div id="monarch">
       <h2>Monarch HDX Controller</h2>
       <button onclick="getStatus()">Get Status</button>
@@ -213,8 +232,11 @@
       <p id="output">Status: Unknown</p>
     </div>
 
+    <hr />
+
     <div id="cameras">
-      <h2>Cameras</h2>
+      <h2>Camera Controls</h2>
+      <p>Opens in new browser window</p>
       <button
         class="blue-button"
         onclick="window.open('http://10.10.20.40/live/index.html', '_blank');"
@@ -238,5 +260,6 @@
         Camera 4
       </button>
     </div>
+    <hr />
   </body>
 </html>
