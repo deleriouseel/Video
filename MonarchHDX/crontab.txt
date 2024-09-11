@@ -1,0 +1,11 @@
+# Run the start_both.php at 6:50 PM on Friday, Monday
+50 18 * * 5,1 /usr/bin/php /var/www/wordpress/MonarchHDX/start_both.php
+
+# Run stop_both.php at 8:35 PM on Friday, Monday
+35 20 * * 5,1 /usr/bin/php /var/www/wordpress/MonarchHDX/stop_both.php
+
+# Run the start_both.php at 8:50 AM, 10:50 AM on Sunday
+50 8,10 * * 0 /usr/bin/php /var/www/wordpress/MonarchHDX/start_both.php
+
+# Run stop_both.php at 10:35 AM, 12:35 PM on Sunday
+35 10,12 * * 0 /usr/bin/php /var/www/wordpress/MonarchHDX/stop_both.php
