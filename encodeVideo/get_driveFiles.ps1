@@ -1,6 +1,6 @@
 # Define the name of the USB drive to monitor
 $driveName = "STUDIO20"
-$destinationFolder = "C:\Users\Video\Desktop\backup"
+$destinationFolder = "C:\Users\AudioVisual\Desktop\backup"
 $files = Get-ChildItem -Path $destinationFolder -Filter "*.MOV" -File
 
 
@@ -48,17 +48,36 @@ function Copy-DriveContents {
 
 # Function to check for the USB drive
 function Update-DriveCheck {
-    $drive = Get-WmiObject Win32_Volume | Where-Object { $_.DriveType -eq 2 }
+    $scsiDrives = Get-WmiObject -Class Win32_DiskDrive -Filter "InterfaceType='SCSI'"
 
-    if ($drive.label -eq $driveName) {
-        Write-Host "Drive '$driveName' detected."
-        $sourcePath = Join-Path -Path "$($drive.DriveLetter)" -ChildPath $sourceFolder
-        Copy-USBContents -source $sourcePath -destination $destinationFolder
-        Write-Host "Contents of Drive '$driveName' copied to '$destinationFolder'."
-        return $true
+    $foundDrive = $false
+
+    foreach ($scsiDrive in $scsiDrives) {
+        # Get logical disks associated with the SCSI drive
+        $partitions = Get-WmiObject -Class Win32_DiskDriveToDiskPartition -Filter "DeviceID='$($scsiDrive.DeviceID)'"
+        foreach ($partition in $partitions) {
+            $logicalDisks = Get-WmiObject -Class Win32_LogicalDiskToPartition -Filter "DeviceID='$($partition.Dependent)'"
+            foreach ($logicalDisk in $logicalDisks) {
+                $disk = Get-WmiObject -Class Win32_LogicalDisk -Filter "DeviceID='$($logicalDisk.Dependent)'"
+                if ($disk.VolumeName -eq $driveName) {
+                    Write-Host "Drive '$driveName' detected."
+                    $sourcePath = Join-Path -Path $disk.DeviceID -ChildPath $sourceFolder
+                    Copy-USBContents -source $sourcePath -destination $destinationFolder
+                    Write-Host "Contents of Drive '$driveName' copied to '$destinationFolder'."
+                    $foundDrive = $true
+                    break
+                }
+            }
+            if ($foundDrive) { break }
+        }
+        if ($foundDrive) { break }
     }
-    else {
-        Write-Host "No USB drive detected"
-        return $false
+
+    if (-not $foundDrive) {
+        Write-Host "No SCSI drive with label '$driveName' detected."
     }
+    
+    return $foundDrive
 } 
+
+Update-DriveCheck
