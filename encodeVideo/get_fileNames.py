@@ -14,7 +14,7 @@ logging.basicConfig(
     filename="filename.log",
 )
 
-folder = r'C:\Users\Video\Desktop\backup'
+folder = r'C:\Users\AudioVisual\Desktop'
 url = os.getenv("WP_API_URL") + "posts?categories=48&per_page=3"
 username = os.getenv("WP_API_USER")
 password = os.getenv("WP_API_PASSWORD")
@@ -29,7 +29,7 @@ response = requests.get(url, headers=headers)
 posts = response.json()
 
 # Match the filename in the URL
-pattern = re.compile(r'https://media\.northcountrychapel\.com/rafiles/([a-zA-Z0-9-]+\.mp3)')
+pattern = re.compile(r'https://media\.northcountrychapel\.com/rafiles/([a-zA-Z0-9-]+)\.mp3')
 
 post_dates = {} #dictionary
 
@@ -48,20 +48,26 @@ for post in posts:
 logging.debug(post_dates)
 
 # Get .mov files
-files = [f for f in os.listdir(folder) if f.endswith('.mov')]
+files = [f for f in os.listdir(folder) if f.endswith('.MOV')]
+logging.debug(files)
 file_dates = {}
 for file in files:
     file_path = os.path.join(folder, file)
     creation_time = os.path.getmtime(file_path)
+    logging.debug(creation_time)
     creation_date = datetime.fromtimestamp(creation_time).date()
+    logging.debug(creation_date)
     file_dates[file] = creation_date
 
-logging.debug(file_dates)
+    logging.debug(file_dates)
+
+
 
 # Rename files
 for file, file_date in file_dates.items():
     if file_date in post_dates:
-        new_file_name = post_dates[file_date]
+        file_extension = os.path.splitext(file)[1]
+        new_file_name = post_dates[file_date] + file_extension
         new_file_path = os.path.join(folder, new_file_name)
         old_file_path = os.path.join(folder, file)
 
