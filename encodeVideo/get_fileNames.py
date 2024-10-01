@@ -67,7 +67,7 @@ for file in files:
 for file, file_date in file_dates.items():
     if file_date in post_dates:
         file_extension = os.path.splitext(file)[1]
-        new_file_name = post_dates[file_date] + file_extension
+        new_file_name = post_dates[file_date] + 'V' + file_extension
         new_file_path = os.path.join(folder, new_file_name)
         old_file_path = os.path.join(folder, file)
 
