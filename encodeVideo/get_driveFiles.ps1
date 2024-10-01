@@ -17,15 +17,18 @@ function Write-Log {
 function Get-LatestDays {
     # Get today's date
     $today = Get-Date
-   
+    
+    # Calculate the last Friday
     $daysSinceFriday = ($today.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
-    $latestFriday = $today.AddDays(-$daysSinceFriday)
+    $latestFriday = $today.AddDays(-$daysSinceFriday).Date
 
+    # Calculate the last Sunday
     $daysSinceSunday = ($today.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
-    $latestSunday = $today.AddDays(-$daysSinceSunday)
-  
+    $latestSunday = $today.AddDays(-$daysSinceSunday).Date
+
+    # Calculate the last Monday
     $daysSinceMonday = ($today.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
-    $latestMonday = $today.AddDays(-$daysSinceMonday)
+    $latestMonday = $today.AddDays(-$daysSinceMonday).Date
 
     # Log the dates
     Write-Log "Latest Friday: $latestFriday"
@@ -51,7 +54,7 @@ if ($movDrive) {
     if ($movFiles) {
         $datesToCheck = Get-LatestDays  # Get the latest Friday, Sunday, and Monday
         foreach ($file in $movFiles) {
-            # Check if the file's creation time is on one of the specified dates
+            # Check if the file's creation date (without time) is on one of the specified dates
             if ($datesToCheck -contains $file.CreationTime.Date) {
                 $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
                 Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
@@ -73,5 +76,3 @@ if ($movDrive) {
     Write-Log "No drive with label 'STUDIO20' found."
 }
 
-
-Get-LatestDays
