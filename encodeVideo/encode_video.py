@@ -12,8 +12,34 @@ logging.basicConfig(
 
 desktop = os.path.join(os.path.expanduser("~"), "Desktop")
 
+def get_peak_volume(input_file):
+    # FFmpeg command to get the max volume
+    command = [
+        'ffmpeg', '-i', input_file,
+        '-af', 'volumedetect',
+        '-vn', '-sn', '-dn',
+        '-f', 'null', '/dev/null'
+    ]
+    
+    # Run the command and capture output
+    result = subprocess.run(command, stderr=subprocess.PIPE, text=True)
+    
+    # Find the max_volume from the output
+    for line in result.stderr.splitlines():
+        if 'max_volume' in line:
+            peak_volume = float(line.split()[4].replace('dB', ''))
+            return peak_volume
+    
+    # If no peak volume is found, return 0 (no adjustment)
+    return 0
+
 def convert_video(input_file, output_file):
     logging.debug(f"Convert video function: {input_file}, {output_file}")
+
+    peak_volume = get_peak_volume(input_file)
+    gain = -peak_volume  # Normalize to 0 dB
+    logging.debug(f"Peak volume: {peak_volume}")
+    logging.info(f"Gain applied: {gain}")
 
     # FFmpeg command
     command = [
@@ -27,7 +53,7 @@ def convert_video(input_file, output_file):
         '-preset', 'medium',
         '-c:a', 'aac',
         '-b:a', '192k',
-        '-filter:a','loudnorm',
+        '-af', f'volume={gain}dB,loudnorm',
         output_file
     ]
     # Execute the FFmpeg command
@@ -45,7 +71,7 @@ def process_files(directory):
     logging.debug(MOV_files)
     
     if not MOV_files:
-        logging.error("No .MOV filewhats found on the desktop.")
+        logging.error("No .MOV files found on the desktop.")
         return
     output_folder = 'D:\\Studies'
     
