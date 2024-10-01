@@ -13,6 +13,28 @@ function Write-Log {
     "$timestamp - $Message" | Out-File -FilePath $logFilePath -Append
 }
 
+# Function to get the latest Friday, Sunday, and Monday
+function Get-LatestDays {
+    # Get today's date
+    $today = Get-Date
+   
+    $daysSinceFriday = ($today.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
+    $latestFriday = $today.AddDays(-$daysSinceFriday)
+
+    $daysSinceSunday = ($today.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
+    $latestSunday = $today.AddDays(-$daysSinceSunday)
+  
+    $daysSinceMonday = ($today.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
+    $latestMonday = $today.AddDays(-$daysSinceMonday)
+
+    # Log the dates
+    Write-Log "Latest Friday: $latestFriday"
+    Write-Log "Latest Sunday: $latestSunday"
+    Write-Log "Latest Monday: $latestMonday"
+
+    return @($latestFriday, $latestSunday, $latestMonday)
+}
+
 # Find the drive with the volume label "STUDIO20"
 $movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -eq "STUDIO20" }
 
@@ -27,14 +49,20 @@ if ($movDrive) {
     $movFiles = Get-ChildItem -Path $sourcePath -Filter *.mov -Recurse -ErrorAction SilentlyContinue
 
     if ($movFiles) {
+        $datesToCheck = Get-LatestDays  # Get the latest Friday, Sunday, and Monday
         foreach ($file in $movFiles) {
-            $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
-            Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
-            try {
-                Copy-Item -Path $file.FullName -Destination $destinationPath -Force
-                Write-Log "Successfully copied '$($file.FullName)' to '$destinationPath'"
-            } catch {
-                Write-Log "Failed to copy '$($file.FullName)' to '$destinationPath': $_"
+            # Check if the file's creation time is on one of the specified dates
+            if ($datesToCheck -contains $file.CreationTime.Date) {
+                $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
+                Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
+                try {
+                    Copy-Item -Path $file.FullName -Destination $destinationPath -Force
+                    Write-Log "Successfully copied '$($file.FullName)' to '$destinationPath'"
+                } catch {
+                    Write-Log "Failed to copy '$($file.FullName)' to '$destinationPath': $_"
+                }
+            } else {
+                Write-Log "File '$($file.FullName)' was not created on the latest Friday, Sunday, or Monday. Skipping."
             }
         }
         Write-Log "All .mov files have been processed."
@@ -45,3 +73,5 @@ if ($movDrive) {
     Write-Log "No drive with label 'STUDIO20' found."
 }
 
+
+Get-LatestDays
