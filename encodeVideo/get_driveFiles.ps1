@@ -59,7 +59,7 @@ if ($movDrive) {
                 $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
                 Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
                 try {
-                    #Copy-Item -Path $file.FullName -Destination $destinationPath -Force
+                    Copy-Item -Path $file.FullName -Destination $destinationPath -Force
                     Write-Log "Successfully copied '$($file.FullName)' to '$destinationPath'"
                 } catch {
                     Write-Log "Failed to copy '$($file.FullName)' to '$destinationPath': $_"
