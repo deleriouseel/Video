@@ -13,6 +13,28 @@ function Write-Log {
     "$timestamp - $Message" | Out-File -FilePath $logFilePath -Append
 }
 
+# Get video length using ffprobe
+function Get-VideoDuration {
+    param (
+        [string]$filePath
+    )
+    $ffprobePath = "ffprobe" # Ensure ffprobe is in your PATH
+    $ffprobeArgs = @(
+        "-v", "error",
+        "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1",
+        $filePath
+    )
+    try {
+        $duration = & $ffprobePath $ffprobeArgs
+        return [double]$duration
+    } catch {
+        Write-Log "Failed to get duration for '$filePath': $_"
+        return $null
+    }
+}
+
+
 # Function to get the latest Friday, Sunday, and Monday
 function Get-LatestDays {
     # Get today's date
@@ -56,13 +78,26 @@ if ($movDrive) {
         foreach ($file in $movFiles) {
             # Check if the file's creation date (without time) is on one of the specified dates
             if ($datesToCheck -contains $file.CreationTime.Date) {
-                $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
-                Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
-                try {
-                    Copy-Item -Path $file.FullName -Destination $destinationPath -Force
-                    Write-Log "Successfully copied '$($file.FullName)' to '$destinationPath'"
-                } catch {
-                    Write-Log "Failed to copy '$($file.FullName)' to '$destinationPath': $_"
+                # Get the duration of the video file
+                $duration = Get-VideoDuration -filePath $file.FullName
+                if ($duration) {
+                    # Log the filename and its duration
+                    Write-Log "File '$($file.Name)' duration: $([math]::Round($duration / 60, 2)) minutes."
+                    
+                    if ($duration -gt 1800) { # 1800 seconds = 30 minutes
+                        $destinationPath = [System.IO.Path]::Combine($desktopPath, $file.Name)
+                        Write-Log "Copying '$($file.FullName)' to '$destinationPath'"
+                        try {
+                            Copy-Item -Path $file.FullName -Destination $destinationPath -Force
+                            Write-Log "Successfully copied '$($file.FullName)' to '$destinationPath'"
+                        } catch {
+                            Write-Log "Failed to copy '$($file.FullName)' to '$destinationPath': $_"
+                        }
+                    } else {
+                        Write-Log "File '$($file.FullName)' is shorter than 30 minutes. Skipping."
+                    }
+                } else {
+                    Write-Log "Could not determine the duration of '$($file.FullName)'. Skipping."
                 }
             } else {
                 Write-Log "File '$($file.FullName)' was not created on the latest Friday, Sunday, or Monday. Skipping."
@@ -75,4 +110,3 @@ if ($movDrive) {
 } else {
     Write-Log "No drive with label 'STUDIO20' found."
 }
-
