@@ -78,7 +78,7 @@ def uploadVimeo(video_path, upload_name):
 
     tags = ["northcountrychapel", "ncc", "biblestudy"]
     regex = r'\b(?:[1-3]?\s?[a-zA-Z]+\s?[A-Za-z]*)\b'
-    book_name = re.search(regex, upload_name).group(0) if re.search(regex, upload_name) else "unknown"
+    #book_name = re.search(regex, upload_name).group(0) if re.search(regex, upload_name) else "unknown"
 
     try:
         # Upload video
