@@ -41,14 +41,14 @@ for foldername in os.listdir(source_dir):
                 if file_modified_time < cutoff_time:
                     # Create the network target path
                     network_target_file_path = os.path.join(network_dir, foldername, filename)
-                    logging.debug(f"Old files found: {filename}")
+                    logging.debug(f"Files found: {network_target_file_path}")
 
                     # Check if the file exists on the network
                     if os.path.isfile(network_target_file_path):
-                        logging.info(f"Deleting: {file_path}")
+                        logging.info(f"Exists in backup: {file_path}")
                         # If it exists, delete the local copy
                         os.remove(file_path)
-                        print(f"Deleted local copy: {file_path}")
+                        logging.info(f"Deleted local copy: {file_path}")
                     else:
                         # If it doesn't exist, move it to the network folder
                         os.makedirs(os.path.dirname(network_target_file_path), exist_ok=True)
