@@ -19,8 +19,8 @@ network_dir = r"\\DocuSynology\video"
 # Get the current time
 now = time.time()
 
-# Fles older than 6 days
-cutoff_time = now - (6 * 24 * 60 * 60)
+# Fles older than 4 days
+cutoff_time = now - (4 * 24 * 60 * 60)
 
 # Loop through all files in the source directory
 for filename in os.listdir(source_dir):
