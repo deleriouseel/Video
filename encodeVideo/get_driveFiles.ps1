@@ -2,7 +2,8 @@
 $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('Desktop'))
 
 # Define the log file path
-$logFilePath = [System.IO.Path]::Combine((Get-Location).Path, "filename.log")
+$logFilePath = [System.IO.Path]::Combine("C:\Users\AudioVisual\Documents\GitHub\Video", "filename.log")
+
 
 # Function to append messages to the log file
 function Write-Log {
