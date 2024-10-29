@@ -7,7 +7,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    filename="C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
+    filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
 )
 
 desktop = os.path.join(os.path.expanduser("~"), "Desktop")
