@@ -14,7 +14,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    filename="C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
+    filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
 )
 
 
@@ -43,6 +43,11 @@ def uploadVideos(directory):
     for filename in os.listdir(directory):
         if filename.endswith('.mp4'): 
             video_path = os.path.join(directory, filename)
+            file_size = os.path.getsize(video_path) / (1024 * 1024 * 1024)
+            
+            if not (1.5 <= file_size <= 5):
+                logging.info(f"{filename} is not between 1.5 GB - 5 GB. Skipping...")
+                continue
             upload_name = os.path.splitext(filename)[0]
 
             if uploadList(upload_name):
