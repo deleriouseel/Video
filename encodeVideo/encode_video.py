@@ -2,6 +2,7 @@ import subprocess
 import os
 import glob
 import logging
+from datetime import datetime, timedelta
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -11,6 +12,29 @@ logging.basicConfig(
 )
 
 desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+
+def get_latest_days():
+    # Get today's date
+    today = datetime.today()
+
+    # Calculate the last Friday
+    days_since_friday = (today.weekday() - 4 + 7) % 7
+    latest_friday = today - timedelta(days=days_since_friday)
+    
+    # Calculate the last Sunday
+    days_since_sunday = (today.weekday() - 6 + 7) % 7
+    latest_sunday = today - timedelta(days=days_since_sunday)
+    
+    # Calculate the last Monday
+    days_since_monday = (today.weekday() - 0 + 7) % 7
+    latest_monday = today - timedelta(days=days_since_monday)
+
+    # Log the dates (can be customized to print or store in log)
+    logging.info(f"Latest Friday: {latest_friday.date()}")
+    logging.info(f"Latest Sunday: {latest_sunday.date()}")
+    logging.info(f"Latest Monday: {latest_monday.date()}")
+
+    return latest_friday.date(), latest_sunday.date(), latest_monday.date()
 
 def get_peak_volume(input_file):
     # FFmpeg command to get the max volume
@@ -64,6 +88,9 @@ def convert_video(input_file, output_file):
         print(f"An error occurred during conversion: {e}")
 
 def process_files(directory):
+
+    latest_friday, latest_sunday, latest_monday = get_latest_days()
+
     search_pattern = os.path.join(directory, '*.MOV')
     
     # Find all .MOV files
@@ -76,6 +103,17 @@ def process_files(directory):
     output_folder = 'D:\\Studies'
     
     for input_file in MOV_files:
+
+        file_timestamp = os.path.getmtime(input_file)
+        file_date = datetime.fromtimestamp(file_timestamp).date()
+        logging.debug(file_date)
+
+
+        if file_date in {latest_friday, latest_sunday, latest_monday}:
+            # Define the output file path
+            file_name = os.path.basename(input_file)
+            output_file = os.path.join(output_folder, file_name.replace('.MOV', '.mp4'))
+            logging.debug(f"Processing: {input_file} -> {output_file}")
         # Define the output file path
         file_name = os.path.basename(input_file)
         output_file = os.path.join(output_folder, file_name.replace('.MOV', '.mp4'))
