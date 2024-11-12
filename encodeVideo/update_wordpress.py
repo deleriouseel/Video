@@ -34,6 +34,8 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
 
+logging.info("Starting upload_video.py")
+
 def normalize_title(title):
     return html.unescape(title).strip().lower()
 
@@ -53,7 +55,7 @@ def getVideoInfo():
     }).json()
 
     if video_info:
-    #   logging.debug(video_info)
+      logging.debug(video_info)
       logging.info("Returning video_info")
       return video_info['data']
     else:
@@ -110,7 +112,7 @@ def updatePost():
                     post_content = re.sub(r'[\r\n]+', '\n', post_content)
 
                     payload = json.dumps({
-                        "content": post_content + embed_code
+                        "content": post_content + "\n" + embed_code
                     })
 
                     # Update the post in WordPress

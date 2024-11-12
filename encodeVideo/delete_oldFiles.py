@@ -7,7 +7,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
-    filename="filename.log",
+    filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
 )
 
 
@@ -18,9 +18,9 @@ network_dir = r"\\DocuSynology\video"
 # Get the current time
 now = time.time()
 
-# Calculate the cutoff time for files older than 3 weeks
+# Calculate files older than 3 weeks
 cutoff_time = now - (3 * 7 * 24 * 60 * 60)
-
+logging.info("Starting delete_oldFiles.py")
 # Loop through all folders in the source directory
 for foldername in os.listdir(source_dir):
     folder_path = os.path.join(source_dir, foldername)
@@ -45,7 +45,7 @@ for foldername in os.listdir(source_dir):
 
                     # Check if the file exists on the network
                     if os.path.isfile(network_target_file_path):
-                        logging.info(f"Exists in backup: {file_path}")
+                        logging.info(f"Exists in backup: {network_target_file_path}")
                         # If it exists, delete the local copy
                         os.remove(file_path)
                         logging.info(f"Deleted local copy: {file_path}")
