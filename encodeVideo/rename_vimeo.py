@@ -43,7 +43,7 @@ def getVideoInfo():
     }).json()
 
     if video_info:
-        logging.debug(video_info)
+        #logging.debug(video_info)
         logging.info("Returning video_info")
         return video_info['data']
     else:
@@ -77,26 +77,35 @@ def getWordpressInfo():
             titles.append(post['title']['rendered'])
 
 
-    logging.info(titles, filenames)
+    logging.info(f"Titles: {titles}")
+    logging.info(f"Filenames: {filenames}")
     return titles, filenames
 
-    # Iterate through each video and patch with post_title
-    # Send patch to vimeo
+# Iterate through each video and patch with post_title
+# Send patch to vimeo
 def update_vimeo_titles(videos, titles, filenames):
     for video in videos:
         current_title = video['name']
+        logging.debug(f"Current title: {current_title}")
         
         # Check if the video title matches any filename
-        file_name = current_title.split('-')[0]  
+        file_name = current_title.replace('V.mp4', '').strip()
+        logging.debug(f"File name: {file_name}")
         
         # Find the corresponding WordPress title
         if file_name in filenames:
-            index =filenames.index(file_name)
+            logging.debug(f"Comparing file_name: '{file_name}' with filenames: {filenames}")
+            index = filenames.index(file_name)
             matching_title = titles[index]
+            logging.debug(f"Matching title from WordPress: {matching_title}")
+
+            # Payload for the PATCH request
+            payload = {'name': matching_title}
+            logging.debug(f"Payload for PATCH request: {payload}")
 
             # Update the Vimeo title
-            client.patch(video['uri'], {'name': matching_title})
-            logging.info(f"Updated video '{current_title}' to '{matching_title}'")
+            client.patch(video['uri'], json=payload)
+            logging.info(f"Changed {file_name} to {matching_title}")
 
 
 def main():
