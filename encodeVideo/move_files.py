@@ -1,3 +1,7 @@
+'''
+Move video files to the backup server if it is at least 4 days old.
+'''
+
 import os
 import shutil
 import time
@@ -11,12 +15,11 @@ logging.basicConfig(
     filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
 )
 
-# Set the directory to scan
 source_dir = r"D:\Studies"
 network_dir = r"\\DocuSynology\video"
 
 logging.info("Starting move_files.py")
-# Get the current time
+
 now = time.time()
 
 # Fles older than 4 days
@@ -31,8 +34,8 @@ for filename in os.listdir(source_dir):
     
     if os.path.isfile(file_path):
         file_modified_time = os.path.getmtime(file_path)
-
-        if file_modified_time < cutoff_time:
+        #If file is > 4 days old
+        if file_modified_time > cutoff_time:
             # Get the folder name
             target_folder = filename[:6]
             logging.debug(target_folder)
@@ -53,7 +56,3 @@ for filename in os.listdir(source_dir):
             logging.info(f"Moving {filename} to {target_path}")
             shutil.move(file_path, os.path.join(target_path, filename))
             logging.info(f"Finished moving {filename}")
-
-
-
-print("File moving process completed.")
