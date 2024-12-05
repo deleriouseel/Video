@@ -1,11 +1,6 @@
-# Define the destination folder (Desktop)
 $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('Desktop'))
-
-# Define the log file path
 $logFilePath = [System.IO.Path]::Combine("C:\Users\AudioVisual\Documents\GitHub\Video", "filename.log")
 
-
-# Function to append messages to the log file
 function Write-Log {
     param (
         [string]$Message
@@ -34,9 +29,6 @@ function Get-VideoDuration {
         return $null
     }
 }
-
-
-# Function to get the latest Friday, Sunday, and Monday
 function Get-LatestDays {
     # Get today's date
     $today = Get-Date
@@ -62,14 +54,14 @@ function Get-LatestDays {
 }
 
 # Find the drive with the volume label "STUDIO20"
-$movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -eq "STUDIO20" }
+$movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -like "STUDIO20" }
 
 if ($movDrive) {
     $driveLetter = $movDrive.DriveLetter
     Write-Log "Drive with label 'STUDIO20' found: ${driveLetter}:"
 
-    # Define the source path
-    $sourcePath = "${driveLetter}:\"  # Ensure the path ends with a backslash
+    # Source path
+    $sourcePath = "${driveLetter}:\" 
 
     # Find and copy .mov files to the Desktop
     $movFiles = Get-ChildItem -Path $sourcePath -Filter *.mov -Recurse -ErrorAction SilentlyContinue
@@ -77,12 +69,12 @@ if ($movDrive) {
     if ($movFiles) {
         $datesToCheck = Get-LatestDays  # Get the latest Friday, Sunday, and Monday
         foreach ($file in $movFiles) {
-            # Check if the file's creation date (without time) is on one of the specified dates
+            # Check if the file's creation date is Friday, Sunday, Monday
             if ($datesToCheck -contains $file.CreationTime.Date) {
-                # Get the duration of the video file
+                # Get the length of the video file
                 $duration = Get-VideoDuration -filePath $file.FullName
                 if ($duration) {
-                    # Log the filename and its duration
+                    # Log the filename and its length
                     Write-Log "File '$($file.Name)' duration: $([math]::Round($duration / 60, 2)) minutes."
                     
                     if ($duration -gt 1800) { # 1800 seconds = 30 minutes
@@ -109,5 +101,5 @@ if ($movDrive) {
         Write-Log "No .mov files found on the drive."
     }
 } else {
-    Write-Log "No drive with label 'STUDIO20' found."
+    Write-Log "No drive with label 'STUDIO' found."
 }

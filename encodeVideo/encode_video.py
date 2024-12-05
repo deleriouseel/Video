@@ -29,7 +29,6 @@ def get_latest_days():
     days_since_monday = (today.weekday() - 0 + 7) % 7
     latest_monday = today - timedelta(days=days_since_monday)
 
-    # Log the dates (can be customized to print or store in log)
     logging.info(f"Latest Friday: {latest_friday.date()}")
     logging.info(f"Latest Sunday: {latest_sunday.date()}")
     logging.info(f"Latest Monday: {latest_monday.date()}")
@@ -54,7 +53,7 @@ def get_peak_volume(input_file):
             peak_volume = float(line.split()[4].replace('dB', ''))
             return peak_volume
     
-    # If no peak volume is found, return 0 (no adjustment)
+    # If no peak volume is found, return 0 
     return 0
 
 def convert_video(input_file, output_file):
@@ -114,13 +113,9 @@ def process_files(directory):
             file_name = os.path.basename(input_file)
             output_file = os.path.join(output_folder, file_name.replace('.MOV', '.mp4'))
             logging.debug(f"Processing: {input_file} -> {output_file}")
-        # Define the output file path
-        file_name = os.path.basename(input_file)
-        output_file = os.path.join(output_folder, file_name.replace('.MOV', '.mp4'))
-        logging.debug(output_file)
-        
-        # Convert the video
-        convert_video(input_file, output_file)
-        logging.info(f"Converting: {input_file}")
+
+            # Convert the video
+            convert_video(input_file, output_file)
+            logging.info(f"Converting: {input_file}")
 
 process_files(desktop)

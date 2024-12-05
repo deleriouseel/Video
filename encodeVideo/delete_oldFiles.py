@@ -1,3 +1,6 @@
+'''
+Deletes files from D:/Studies if they exist on the backup, are at least 3 weeks old, and are .mp4s.
+'''
 import os
 import shutil
 import time
@@ -10,8 +13,6 @@ logging.basicConfig(
     filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
 )
 
-
-# Set the directories
 source_dir = r"D:\Studies"
 network_dir = r"\\DocuSynology\video"
 
