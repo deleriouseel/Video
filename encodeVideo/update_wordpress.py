@@ -19,7 +19,7 @@ load_dotenv()
 today = str(datetime.date.today())
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
@@ -34,7 +34,7 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
     }
 
-logging.info("Starting upload_video.py")
+logging.info("Starting update_wordpress.py")
 
 def normalize_title(title):
     return html.unescape(title).strip().lower()
@@ -55,7 +55,7 @@ def getVideoInfo():
     }).json()
 
     if video_info:
-      logging.debug(video_info)
+      #logging.debug(video_info)
       logging.info("Returning video_info")
       return video_info['data']
     else:
