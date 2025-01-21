@@ -118,7 +118,7 @@ def updatePost():
                     # Update the post in WordPress
                     response = requests.put(f"{url}posts/{post_id}", headers=headers, auth=(username, password), data=payload)
                     logging.info(f"Post updated successfully: {response.text}")
-                    logging.info(f"Post updated with {embed_code}")
+                    logging.debug(f"Post updated with {embed_code}")
                     break 
             else:
                 logging.debug(f"No matching video found for post: {post_title}")
