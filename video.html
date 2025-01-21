@@ -115,16 +115,27 @@
       }
 
       function getInputStatus() {
+        // Clear current status
+        document.getElementById("inputStatus").innerText =
+          "Input Status: Fetching...";
+
         fetch("MonarchHDX/get_input_status.php")
           .then((response) => response.json())
           .then((data) => {
             document.getElementById("inputStatus").innerText =
               "Input Status: " + data.status;
           })
-          .catch((error) => console.error("Error:", error));
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("inputStatus").innerText =
+              "Input Status: Error fetching status";
+          });
       }
 
       function getStatus() {
+        // Clear current status and show loading state
+        document.getElementById("getStatus").innerText = "Status: Fetching...";
+
         fetch("/MonarchHDX/get_status.php")
           .then((response) => response.json())
           .then((data) => {
@@ -136,8 +147,13 @@
             document.getElementById("getStatus").innerText =
               "Status:" + formattedStatus;
           })
-          .catch((error) => console.error("Error:", error));
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("getStatus").innerText =
+              "Status: Error fetching status";
+          });
       }
+
       //WERDS function
       function sendCommand(command) {
         // Create a FormData object to hold the command data
