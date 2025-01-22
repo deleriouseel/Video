@@ -1,5 +1,6 @@
 '''
 Move video files to the backup server if it is at least 4 days old.
+Moves files to bookname local folder.
 '''
 
 import os

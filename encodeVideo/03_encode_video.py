@@ -1,3 +1,9 @@
+'''
+If .MOV files on the desktop were created on the previous Friday, Sunday, or Monday:
+Normalize audio and encode video files on desktop using FFmpeg equivalent of Handbrake Fast 1080p30 -crf 21. Saves to D:\Studies. 
+
+'''
+
 import subprocess
 import os
 import glob

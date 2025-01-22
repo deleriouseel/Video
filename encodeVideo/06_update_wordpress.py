@@ -1,5 +1,6 @@
-"""Update a WordPress post with Vimeo video iframe.
-This fetches info about the latest WordPress posts from the "bible study" category, retrieves video id from Vimeo, and updates the WordPress post with the video embed code if the post's title matches the video title.
+"""
+Update a WordPress post with Vimeo video embed iframe.
+Fetches info about the latest WordPress posts from the "bible study" category, retrieves video id from Vimeo, and updates the WordPress post with the video embed code if the post's title matches the video title.
 
 """
 

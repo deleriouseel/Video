@@ -1,3 +1,6 @@
+# Gets the drive with the label "STUDIO20", searches for .mov files created on the latest Friday, Sunday, or Monday.
+# Copies them to the Desktop if they are longer than 30 minutes. It logs all actions to a filename.log.
+
 $desktopPath = [System.IO.Path]::Combine([System.Environment]::GetFolderPath('Desktop'))
 $logFilePath = [System.IO.Path]::Combine("C:\Users\AudioVisual\Documents\GitHub\Video", "filename.log")
 

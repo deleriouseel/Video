@@ -68,7 +68,7 @@ def get_monday():
 # TODO Get CSV from 
 start_date = get_friday()
 end_date = get_monday()
-link= f"https://dashboard.subsplash.com/-d/#/media/v1/media-items-metadata?filter%5Bapp_key%5D=FMJKKH&filter%5Bstart_date%5D={start_date}&filter%5Bend_date%5D={end_date}"
+link= f"https://core.subsplash.com/media/v1/media-items-metadata?filter%5Bapp_key%5D=FMJKKH&filter%5Bstart_date%5D=2025-01-03&filter%5Bend_date%5D=2025-01-14"
 print(link)
 
 def download_csv(session, link):

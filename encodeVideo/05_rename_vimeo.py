@@ -1,3 +1,8 @@
+'''
+Gets the latest 3 videos from Vimeo and the latest 3 bible study posts from WordPress. 
+If the video title matches the post filename, update the Vimeo title to match the Wordpress title.
+'''
+
 import logging
 import requests
 import os

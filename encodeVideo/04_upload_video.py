@@ -1,3 +1,6 @@
+'''
+Uploads videos to Vimeo from D:/Studies
+'''
 import os
 import logging
 import vimeo
