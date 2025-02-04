@@ -5,7 +5,7 @@ import logging
 from datetime import datetime, timedelta
 
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s %(levelname)s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     filename=r"C:\Users\AudioVisual\Documents\GitHub\Video\filename.log",
