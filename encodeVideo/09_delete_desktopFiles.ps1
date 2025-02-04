@@ -1,3 +1,6 @@
+# Deletes all .MOV and .mp4 files on the Desktop that are older than the latest Friday (last week's).
+
+
 $logFilePath = [System.IO.Path]::Combine("C:\Users\AudioVisual\Documents\GitHub\Video", "filename.log")
 
 function Write-Log {

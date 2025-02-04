@@ -1,3 +1,6 @@
+# Deletes all files on the STUDIO20 drive that are older than the latest Friday (last week's).
+
+
 $movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -eq "STUDIO20" }
 $logFilePath = [System.IO.Path]::Combine("C:\Users\AudioVisual\Documents\GitHub\Video", "filename.log")
 

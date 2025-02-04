@@ -1,3 +1,6 @@
+'''
+Get filenames from WordPress posts and rename .mov files accordingly.
+'''
 import logging
 import requests
 import re
