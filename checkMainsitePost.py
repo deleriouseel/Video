@@ -7,14 +7,14 @@ It then tests that the audio file link exists.
 import logging
 import requests
 import os
-import datetime
 import re
 from dotenv import load_dotenv
+from datetime import datetime, timezone
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
+from zoneinfo import ZoneInfo
 
 load_dotenv()
-today = str(datetime.date.today())
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -60,14 +60,19 @@ def checkWPPost():
     
     latest_post = posts[0]
 
-    from datetime import datetime, timezone
+ 
+    # Convert post date to local time
     post_date = datetime.fromisoformat(latest_post['date'].replace('Z', '+00:00'))
-    current_date = datetime.now(timezone.utc)
+    site_timezone = ZoneInfo("US/Pacific")
+    post_date_local = post_date.astimezone(site_timezone)
+    current_date_local = datetime.now(site_timezone)
 
+    logging.debug(f"Post date (Local): {post_date_local}")
+    logging.debug(f"Current date (Local): {current_date_local}")
 
-    if post_date.date() != current_date.date():
-        logging.error(f"No Audio Study post found for {current_date.date()}")
-        send_email(latest_post, None, None, f"No Audio Study post found for {current_date.date()}")
+    if post_date_local.date() != current_date_local.date():
+        logging.error(f"No Audio Study post found for {current_date_local.date()}")
+        send_email(latest_post, None, None, f"No Audio Study post found for {current_date_local.date()}")
         return None
 
     is_valid, content_length, last_modified, validation_message = validate_post(latest_post, required_category, bible_categories)
@@ -80,7 +85,6 @@ def checkWPPost():
         logging.info("No valid post found.")
         send_email(latest_post, content_length, last_modified, validation_message)
         return None
-    
     
 def validate_post(post, required_category, bible_categories):
     logging.info("validate_post")
