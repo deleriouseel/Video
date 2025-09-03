@@ -61,8 +61,8 @@ def uploadVideos(directory):
                 logging.info(f"{filename} is not newer than previous Thursday. Skipping...")
                 continue
             
-            if not (1.5 <= file_size <= 5):
-                logging.info(f"{filename} is not between 1.5 GB - 5 GB. Skipping...")
+            if not (1.1 <= file_size <= 5):
+                logging.info(f"{filename} is not between 1.1 GB - 5 GB. Skipping...")
                 continue
             
             upload_name = filename 
