@@ -35,26 +35,52 @@ function Get-VideoDuration {
     }
 }
 
-function Get-LatestDays {
-    # Get today's date
-    $today = Get-Date
+# function Get-LatestDays {
+#     # Get today's date
+#     $today = Get-Date
     
-    # Calculate the last Friday
-    $daysSinceFriday = ($today.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
-    $latestFriday = $today.AddDays(-$daysSinceFriday).Date
+#     # Calculate the last Friday
+#     $daysSinceFriday = ($today.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
+#     $latestFriday = $today.AddDays(-$daysSinceFriday).Date
 
-    # Calculate the last Sunday
-    $daysSinceSunday = ($today.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
-    $latestSunday = $today.AddDays(-$daysSinceSunday).Date
+#     # Calculate the last Sunday
+#     $daysSinceSunday = ($today.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
+#     $latestSunday = $today.AddDays(-$daysSinceSunday).Date
 
-    # Calculate the last Monday
-    $daysSinceMonday = ($today.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
-    $latestMonday = $today.AddDays(-$daysSinceMonday).Date
+#     # Calculate the last Monday
+#     $daysSinceMonday = ($today.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
+#     $latestMonday = $today.AddDays(-$daysSinceMonday).Date
+
+#     # Log the dates
+#     Write-Log "Latest Friday: $latestFriday"
+#     Write-Log "Latest Sunday: $latestSunday"
+#     Write-Log "Latest Monday: $latestMonday"
+
+#     return @($latestFriday, $latestSunday, $latestMonday)
+# }
+
+#The recorder won't accept dates past 2024, so going back to 2014
+function Get-LatestDays {
+    # Get today's date but convert to 2014
+    $today = Get-Date
+    $today2014 = Get-Date -Year 2014 -Month $today.Month -Day $today.Day
+    
+    # Calculate the last Friday in 2014
+    $daysSinceFriday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
+    $latestFriday = $today2014.AddDays(-$daysSinceFriday).Date
+
+    # Calculate the last Sunday in 2014
+    $daysSinceSunday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
+    $latestSunday = $today2014.AddDays(-$daysSinceSunday).Date
+
+    # Calculate the last Monday in 2014
+    $daysSinceMonday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
+    $latestMonday = $today2014.AddDays(-$daysSinceMonday).Date
 
     # Log the dates
-    Write-Log "Latest Friday: $latestFriday"
-    Write-Log "Latest Sunday: $latestSunday"
-    Write-Log "Latest Monday: $latestMonday"
+    Write-Log "Latest Friday (2014): $latestFriday"
+    Write-Log "Latest Sunday (2014): $latestSunday"
+    Write-Log "Latest Monday (2014): $latestMonday"
 
     return @($latestFriday, $latestSunday, $latestMonday)
 }

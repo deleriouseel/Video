@@ -1,7 +1,7 @@
 '''
 If .MOV files on the desktop were created on the previous Friday, Sunday, or Monday:
 Normalize audio and encode video files on desktop using FFmpeg equivalent of Handbrake Fast 1080p30 -crf 21. Saves to D:\Studies. 
-
+Modified to use month/day matching to handle files with 2014 dates from recorder.
 '''
 
 import subprocess
@@ -39,7 +39,16 @@ def get_latest_days():
     logging.info(f"Latest Sunday: {latest_sunday.date()}")
     logging.info(f"Latest Monday: {latest_monday.date()}")
 
-    return latest_friday.date(), latest_sunday.date(), latest_monday.date()
+    # Return both the full dates and month/day tuples for comparison
+    target_month_days = [
+        (latest_friday.month, latest_friday.day),
+        (latest_sunday.month, latest_sunday.day),
+        (latest_monday.month, latest_monday.day)
+    ]
+    
+    logging.info(f"Target month/day combinations: {target_month_days}")
+    
+    return latest_friday.date(), latest_sunday.date(), latest_monday.date(), target_month_days
 
 def get_peak_volume(input_file):
     # FFmpeg command to get the max volume
@@ -47,7 +56,7 @@ def get_peak_volume(input_file):
         'ffmpeg', '-i', input_file,
         '-af', 'volumedetect',
         '-vn', '-sn', '-dn',
-        '-f', 'null', '/dev/null'
+        '-f', 'null', 'nul' if os.name == 'nt' else '/dev/null'  # Use 'nul' on Windows
     ]
     
     # Run the command and capture output
@@ -88,40 +97,64 @@ def convert_video(input_file, output_file):
     # Execute the FFmpeg command
     try:
         subprocess.run(command, check=True)
-        print(f"Conversion successful: {output_file}")
+        logging.info(f"Conversion successful: {output_file}")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred during conversion: {e}")
+        logging.error(f"An error occurred during conversion: {e}")
 
 def process_files(directory):
 
-    latest_friday, latest_sunday, latest_monday = get_latest_days()
+    latest_friday, latest_sunday, latest_monday, target_month_days = get_latest_days()
 
     search_pattern = os.path.join(directory, '*.MOV')
     
     # Find all .MOV files
     MOV_files = glob.glob(search_pattern)
-    logging.debug(MOV_files)
+    logging.debug(f"Found MOV files: {MOV_files}")
     
     if not MOV_files:
         logging.error("No .MOV files found on the desktop.")
         return
+    
     output_folder = 'D:\\Studies'
     
+    # Ensure output directory exists
+    os.makedirs(output_folder, exist_ok=True)
+    
     for input_file in MOV_files:
-
         file_timestamp = os.path.getmtime(input_file)
         file_date = datetime.fromtimestamp(file_timestamp).date()
-        logging.debug(file_date)
+        file_month_day = (file_date.month, file_date.day)
+        
+        logging.debug(f"File: {os.path.basename(input_file)}")
+        logging.debug(f"  File date: {file_date}")
+        logging.debug(f"  File month/day: {file_month_day}")
 
-
-        if file_date in {latest_friday, latest_sunday, latest_monday}:
+        # Check if file's month/day matches any of our target days
+        if file_month_day in target_month_days:
+            # Find which target day it matches for logging
+            if file_month_day == (latest_friday.month, latest_friday.day):
+                match_type = "Friday"
+                reference_date = latest_friday
+            elif file_month_day == (latest_sunday.month, latest_sunday.day):
+                match_type = "Sunday"
+                reference_date = latest_sunday
+            elif file_month_day == (latest_monday.month, latest_monday.day):
+                match_type = "Monday"
+                reference_date = latest_monday
+            
+            logging.info(f"File {os.path.basename(input_file)} matches {match_type} pattern")
+            logging.info(f"  File date: {file_date} matches reference date: {reference_date} (both {file_month_day[0]}/{file_month_day[1]})")
+            
             # Define the output file path
             file_name = os.path.basename(input_file)
             output_file = os.path.join(output_folder, file_name.replace('.MOV', '.mp4'))
-            logging.debug(f"Processing: {input_file} -> {output_file}")
+            logging.info(f"Processing: {input_file} -> {output_file}")
 
             # Convert the video
             convert_video(input_file, output_file)
-            logging.info(f"Converting: {input_file}")
+        else:
+            logging.info(f"File {os.path.basename(input_file)} does not match target days")
+            logging.debug(f"  File month/day {file_month_day} not in target list: {target_month_days}")
 
-process_files(desktop)
+if __name__ == "__main__":
+    process_files(desktop)
