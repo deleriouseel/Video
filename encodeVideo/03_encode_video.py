@@ -83,6 +83,7 @@ def convert_video(input_file, output_file):
     command = [
         'ffmpeg',
         '-y',
+        '-report',
         '-i', input_file,
         '-vf', 'yadif,scale=1920:1080', 
         '-r', '30',
