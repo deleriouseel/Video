@@ -23,10 +23,10 @@ function Get-AdjustedFileDate {
     param (
         [System.IO.FileInfo]$File
     )
-    
-    # If the file's creation year is 2014, assume it's actually from the current year
+
+    # If the file's creation year is before 2020 (hardware firmware bug), assume it's actually from the current year
     # but keep the same month and day
-    if ($File.CreationTime.Year -eq 2014) {
+    if ($File.CreationTime.Year -lt 2020) {
         $currentYear = (Get-Date).Year
         $adjustedDate = Get-Date -Year $currentYear -Month $File.CreationTime.Month -Day $File.CreationTime.Day -Hour $File.CreationTime.Hour -Minute $File.CreationTime.Minute -Second $File.CreationTime.Second
         return $adjustedDate.Date
