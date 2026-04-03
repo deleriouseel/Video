@@ -83,6 +83,7 @@ def convert_video(input_file, output_file):
     command = [
         'ffmpeg',
         '-y',
+        '-report',
         '-i', input_file,
         '-vf', 'yadif,scale=1920:1080', 
         '-r', '30',
@@ -96,10 +97,16 @@ def convert_video(input_file, output_file):
     ]
     # Execute the FFmpeg command
     try:
-        subprocess.run(command, check=True)
+        subprocess.run(command, check=True, capture_output=True, text=True)
         logging.info(f"Conversion successful: {output_file}")
     except subprocess.CalledProcessError as e:
-        logging.error(f"An error occurred during conversion: {e}")
+        logging.error(f"FFmpeg failed with exit code {e.returncode}")
+        logging.error(f"FFmpeg stderr: {e.stderr}")
+        logging.error(f"FFmpeg stdout: {e.stdout}")
+        raise  # Re-raise to stop processing
+    except Exception as e:
+        logging.error(f"Unexpected error during conversion: {type(e).__name__}: {e}")
+        raise
 
 def process_files(directory):
 

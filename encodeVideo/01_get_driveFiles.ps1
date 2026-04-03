@@ -61,27 +61,26 @@ function Get-VideoDuration {
 
 #The recorder won't accept dates past 2024, so going back to 2014
 function Get-LatestDays {
-    # Get today's date but convert to 2014
+    # Get today's date and calculate the offset year
     $today = Get-Date
-    $today2014 = Get-Date -Year 2014 -Month $today.Month -Day $today.Day
+    $yearOffset = $today.Year - 2026 
+    $targetYear = 2015 + $yearOffset
     
-    # Calculate the last Friday in 2014
-    $daysSinceFriday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
-    $latestFriday = $today2014.AddDays(-$daysSinceFriday).Date
-
-    # Calculate the last Sunday in 2014
-    $daysSinceSunday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
-    $latestSunday = $today2014.AddDays(-$daysSinceSunday).Date
-
-    # Calculate the last Monday in 2014
-    $daysSinceMonday = ($today2014.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
-    $latestMonday = $today2014.AddDays(-$daysSinceMonday).Date
-
+    $todayOffset = Get-Date -Year $targetYear -Month $today.Month -Day $today.Day
+    
+    # Calculate the last Friday
+    $daysSinceFriday = ($todayOffset.DayOfWeek - [int][System.DayOfWeek]::Friday + 7) % 7
+    $latestFriday = $todayOffset.AddDays(-$daysSinceFriday).Date
+    # Calculate the last Sunday
+    $daysSinceSunday = ($todayOffset.DayOfWeek - [int][System.DayOfWeek]::Sunday + 7) % 7
+    $latestSunday = $todayOffset.AddDays(-$daysSinceSunday).Date
+    # Calculate the last Monday
+    $daysSinceMonday = ($todayOffset.DayOfWeek - [int][System.DayOfWeek]::Monday + 7) % 7
+    $latestMonday = $todayOffset.AddDays(-$daysSinceMonday).Date
     # Log the dates
-    Write-Log "Latest Friday (2014): $latestFriday"
-    Write-Log "Latest Sunday (2014): $latestSunday"
-    Write-Log "Latest Monday (2014): $latestMonday"
-
+    Write-Log "Latest Friday ($targetYear): $latestFriday"
+    Write-Log "Latest Sunday ($targetYear): $latestSunday"
+    Write-Log "Latest Monday ($targetYear): $latestMonday"
     return @($latestFriday, $latestSunday, $latestMonday)
 }
 
