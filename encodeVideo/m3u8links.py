@@ -4,18 +4,16 @@ import datetime
 import json
 import vimeo
 from dotenv import load_dotenv
+from logger import get_logger
 
 # Load environment variables
 load_dotenv()
 
-# Set up logging
 today = str(datetime.date.today())
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-    filename=f"vimeo_m3u8_extractor_{today}.log",
-)
+SCRIPT_NAME = "vimeo_m3u8"
+
+logger = get_logger(SCRIPT_NAME, __file__)
+
 
 def get_m3u8_links():
     """
@@ -26,8 +24,9 @@ def get_m3u8_links():
         key=os.getenv("VIMEO_KEY"),
         secret=os.getenv("VIMEO_SECRET"),
     )
-    logging.info("Getting latest videos from Vimeo")
-    
+    logger.info("Getting latest videos from Vimeo",
+                extra={'script': SCRIPT_NAME})
+
     # Create a list to store all the links and information
     all_links = []
 
@@ -38,36 +37,43 @@ def get_m3u8_links():
             'direction': 'desc',
             'per_page': 3
         })
-        
+
         # Parse the response
         videos_data = response.json()
-        
+        logger.debug(f"Vimeo API response status: {response.status_code}, videos returned: {len(videos_data.get('data', []))}",
+                     extra={'script': SCRIPT_NAME})
+
         # Process each video
         for video in videos_data['data']:
             video_id = video["uri"].split('/')[-1]
             video_title = video["name"]
-            
-            logging.info(f"Processing video: {video_title} (ID: {video_id})")
-            
+
+            logger.info(f"Processing video: {video_title} (ID: {video_id})",
+                        extra={'script': SCRIPT_NAME, 'video_id': video_id})
+
             # Find the m3u8 link in the files array
             m3u8_link = None
-            
+
             for file_info in video["files"]:
                 if file_info.get("quality") == "hls" and "link" in file_info:
                     # Get the original m3u8 link
                     original_link = file_info["link"]
-                    
+
                     # Replace oauth2_token_id parameter with logging=false
                     if "oauth2_token_id=" in original_link:
                         m3u8_link = original_link.split("oauth2_token_id=")[0] + "logging=false"
                     else:
                         m3u8_link = original_link
-                        
-                    logging.info(f"Original m3u8 link: {original_link}")
-                    logging.info(f"Modified m3u8 link: {m3u8_link}")
+
+                    logger.debug(f"Original m3u8 link: {original_link}",
+                                 extra={'script': SCRIPT_NAME, 'video_id': video_id})
+                    logger.debug(f"Modified m3u8 link: {m3u8_link}",
+                                 extra={'script': SCRIPT_NAME, 'video_id': video_id})
                     break
-            
+
             if m3u8_link:
+                logger.info(f"Found m3u8 link for '{video_title}' (ID: {video_id}): {m3u8_link}",
+                            extra={'script': SCRIPT_NAME, 'video_id': video_id})
                 # Add the video info and link to our list
                 all_links.append({
                     "video_id": video_id,
@@ -75,15 +81,18 @@ def get_m3u8_links():
                     "link": m3u8_link
                 })
             else:
-                logging.error(f"No m3u8 link found for video: {video_title}")
-        
+                logger.error(f"No m3u8 link found for video: {video_title}",
+                             extra={'script': SCRIPT_NAME, 'video_id': video_id})
+
         # Save all links to a single file
         if all_links:
             save_links_to_file(all_links)
-    
+
     except Exception as e:
-        logging.error(f"Error getting videos: {e}")
+        logger.error(f"Error getting videos: {e}",
+                     extra={'script': SCRIPT_NAME, 'error_type': type(e).__name__})
         return None
+
 
 def save_links_to_file(links_data):
     """
@@ -91,23 +100,34 @@ def save_links_to_file(links_data):
     """
     try:
         # Get desktop path
-        desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+        desktop_path = "C:\\Users\\KristinHoppe\\Desktop"
         file_path = os.path.join(desktop_path, f"vimeo_m3u8_links_{today}.txt")
-        
+
         with open(file_path, 'w') as f:
             for item in links_data:
-                # Write video title and ID as a comment line
                 f.write(f"# {item['title']} (ID: {item['video_id']})\n")
-                # Write the m3u8 link
                 f.write(f"{item['link']}\n\n")
-        
-        logging.info(f"Saved all m3u8 links to {file_path}")
+
+        if os.path.exists(file_path):
+            logger.debug(f"Verified file exists at {file_path}, size: {os.path.getsize(file_path)} bytes",
+                         extra={'script': SCRIPT_NAME})
+        else:
+            logger.error(f"File NOT found at {file_path} after write attempt",
+                         extra={'script': SCRIPT_NAME})
+
+        logger.info(f"Saved all m3u8 links to {file_path}",
+                    extra={'script': SCRIPT_NAME, 'file_path': file_path,
+                           'link_count': len(links_data)})
         return file_path
     except Exception as e:
-        logging.error(f"Error saving links to file: {e}")
+        logger.error(f"Error saving links to file: {e}",
+                     extra={'script': SCRIPT_NAME, 'error_type': type(e).__name__})
         return None
 
+
 if __name__ == "__main__":
-    logging.info("Starting Vimeo m3u8 link extractor")
+    logger.info("Starting Vimeo m3u8 link extractor",
+                extra={'script': SCRIPT_NAME})
     get_m3u8_links()
-    logging.info("Completed extraction process")
+    logger.info("Completed extraction process",
+                extra={'script': SCRIPT_NAME})

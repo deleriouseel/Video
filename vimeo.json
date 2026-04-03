@@ -1,0 +1,850 @@
+{
+  "uri": "/videos/1051149880",
+  "name": "1 Thessalonians 2:11-20",
+  "description": null,
+  "type": "video",
+  "link": "https://vimeo.com/1051149880",
+  "player_embed_url": "https://player.vimeo.com/video/1051149880?h=9263e9a503",
+  "duration": 3524,
+  "width": 1920,
+  "language": "en",
+  "height": 1080,
+  "embed": {
+    "html": "<iframe src=\"https://player.vimeo.com/video/1051149880?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=293113\" width=\"1920\" height=\"1080\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media\" title=\"1 Thessalonians 2:11-20\"></iframe>",
+    "badges": {
+      "hdr": false,
+      "live": { "streaming": false, "archived": false },
+      "staff_pick": {
+        "normal": false,
+        "best_of_the_month": false,
+        "best_of_the_year": false,
+        "premiere": false
+      },
+      "vod": false,
+      "weekend_challenge": false
+    },
+    "interactive": false,
+    "buttons": {
+      "watchlater": false,
+      "share": true,
+      "embed": false,
+      "hd": false,
+      "fullscreen": true,
+      "scaling": true,
+      "like": false
+    },
+    "logos": {
+      "vimeo": false,
+      "custom": {
+        "active": true,
+        "url": null,
+        "link": null,
+        "use_link": false,
+        "sticky": false
+      }
+    },
+    "play_button": { "position": "auto" },
+    "title": { "name": "show", "owner": "hide", "portrait": "hide" },
+    "end_screen": [],
+    "playbar": true,
+    "quality_selector": null,
+    "pip": true,
+    "autopip": true,
+    "volume": true,
+    "color": "949E44",
+    "colors": {
+      "color_one": "000000",
+      "color_two": "00adef",
+      "color_three": "ffffff",
+      "color_four": "000000"
+    },
+    "event_schedule": true,
+    "has_cards": false,
+    "outro_type": "videos",
+    "show_timezone": false,
+    "cards": [],
+    "airplay": true,
+    "audio_tracks": true,
+    "chapters": true,
+    "chromecast": true,
+    "closed_captions": true,
+    "transcript": true,
+    "ask_ai": false,
+    "uri": "/presets/120425183",
+    "email_capture_form": null,
+    "speed": true
+  },
+  "created_time": "2025-01-28T13:37:28+00:00",
+  "modified_time": "2025-01-28T17:09:56+00:00",
+  "release_time": "2025-01-28T13:37:28+00:00",
+  "content_rating": ["safe"],
+  "content_rating_class": "safe",
+  "rating_mod_locked": false,
+  "license": "by-nc-sa",
+  "privacy": {
+    "view": "anybody",
+    "embed": "public",
+    "download": true,
+    "add": true,
+    "comments": "anybody"
+  },
+  "pictures": {
+    "uri": "/videos/1051149880/pictures/1975904332",
+    "active": true,
+    "type": "custom",
+    "base_link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d",
+    "sizes": [
+      {
+        "width": 100,
+        "height": 75,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_100x75?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_100x75&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 200,
+        "height": 150,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_200x150?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_200x150&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 295,
+        "height": 166,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_295x166?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_295x166&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 640,
+        "height": 360,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_640x360?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_640x360&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 960,
+        "height": 540,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_960x540?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_960x540&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_1280x720?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_1280x720&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "link": "https://i.vimeocdn.com/video/1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_1920x1080?r=pad",
+        "link_with_play_button": "https://i.vimeocdn.com/filter/overlay?src0=https%3A%2F%2Fi.vimeocdn.com%2Fvideo%2F1975904332-f53b9681d081b7c94a41b4d3516204c9f6e5cfbe8c3d9d204ca3a82978c04986-d_1920x1080&src1=http%3A%2F%2Ff.vimeocdn.com%2Fp%2Fimages%2Fcrawler_play.png"
+      }
+    ],
+    "resource_key": "c4a328edb0e20b5bc521cb55552089a2da36e9a7",
+    "default_picture": false
+  },
+  "tags": [],
+  "stats": { "plays": 3 },
+  "categories": [],
+  "uploader": {
+    "pictures": {
+      "uri": "/users/75458348/pictures/31617458",
+      "active": true,
+      "type": "custom",
+      "base_link": "https://i.vimeocdn.com/portrait/31617458?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1",
+      "sizes": [
+        {
+          "width": 30,
+          "height": 30,
+          "link": "https://i.vimeocdn.com/portrait/31617458_30x30?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 72,
+          "height": 72,
+          "link": "https://i.vimeocdn.com/portrait/31617458_72x72?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 75,
+          "height": 75,
+          "link": "https://i.vimeocdn.com/portrait/31617458_75x75?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "link": "https://i.vimeocdn.com/portrait/31617458_100x100?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 144,
+          "height": 144,
+          "link": "https://i.vimeocdn.com/portrait/31617458_144x144?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 216,
+          "height": 216,
+          "link": "https://i.vimeocdn.com/portrait/31617458_216x216?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 288,
+          "height": 288,
+          "link": "https://i.vimeocdn.com/portrait/31617458_288x288?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 300,
+          "height": 300,
+          "link": "https://i.vimeocdn.com/portrait/31617458_300x300?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 360,
+          "height": 360,
+          "link": "https://i.vimeocdn.com/portrait/31617458_360x360?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        }
+      ],
+      "resource_key": "749737afc94f353c57e2a2af6fa1f5c305b796ff",
+      "default_picture": false
+    }
+  },
+  "metadata": {
+    "connections": {
+      "comments": {
+        "uri": "/videos/1051149880/comments",
+        "options": ["GET", "POST"],
+        "total": 0
+      },
+      "credits": {
+        "uri": "/videos/1051149880/credits",
+        "options": ["GET", "POST"],
+        "total": 0
+      },
+      "likes": {
+        "uri": "/videos/1051149880/likes",
+        "options": ["GET"],
+        "total": 0
+      },
+      "pictures": {
+        "uri": "/videos/1051149880/pictures",
+        "options": ["GET", "POST"],
+        "total": 1
+      },
+      "texttracks": {
+        "uri": "/videos/1051149880/texttracks",
+        "options": ["GET", "POST"],
+        "total": 1
+      },
+      "related": null,
+      "recommendations": {
+        "uri": "/videos/1051149880/recommendations",
+        "options": ["GET"],
+        "resource_signature": "b44b375facad878900b6e2a6cd00fac0452be1ca475e14fd3d94e477df13491f_1738108393"
+      },
+      "albums": {
+        "uri": "/videos/1051149880/albums",
+        "options": ["GET", "PATCH"],
+        "total": 0
+      },
+      "available_albums": {
+        "uri": "/videos/1051149880/available_albums",
+        "options": ["GET"],
+        "total": 0
+      },
+      "available_channels": {
+        "uri": "/videos/1051149880/available_channels",
+        "options": ["GET"],
+        "total": 0
+      },
+      "versions": {
+        "uri": "/videos/1051149880/versions",
+        "options": ["GET"],
+        "total": 1,
+        "current_uri": "/videos/1051149880/versions/1042593360",
+        "resource_key": "3deb6a5f900f378f33e3f3ff0ec3102ab7d112f2",
+        "latest_incomplete_version": null
+      }
+    },
+    "interactions": {
+      "watchlater": {
+        "uri": "/users/75458348/watchlater/1051149880",
+        "options": ["GET", "PUT", "DELETE"],
+        "added": false,
+        "added_time": null
+      },
+      "report": {
+        "uri": "/videos/1051149880/report",
+        "options": ["POST"],
+        "reason": [
+          "pornographic",
+          "harassment",
+          "ripoff",
+          "incorrect rating",
+          "spam",
+          "causes harm",
+          "csam",
+          "voting misinformation"
+        ]
+      },
+      "view_team_members": {
+        "uri": "/videos/1051149880/teammembers",
+        "options": ["GET"]
+      },
+      "edit": {
+        "uri": "/videos/1051149880",
+        "options": ["PATCH"],
+        "blocked_fields": []
+      },
+      "edit_content_rating": {
+        "uri": "/videos/1051149880",
+        "options": ["PATCH"],
+        "content_rating": [
+          "language",
+          "drugs",
+          "violence",
+          "nudity",
+          "advertisement",
+          "safe",
+          "unrated"
+        ]
+      },
+      "edit_privacy": {
+        "uri": "/videos/1051149880",
+        "options": ["PATCH"],
+        "content_type": "application/vnd.vimeo.video",
+        "properties": [
+          {
+            "name": "privacy.view",
+            "required": true,
+            "options": ["anybody", "nobody", "password", "disable", "unlisted"]
+          }
+        ]
+      },
+      "delete": { "uri": "/videos/1051149880", "options": ["DELETE"] },
+      "can_update_privacy_to_public": {
+        "uri": "/videos/1051149880",
+        "options": ["PATCH"]
+      },
+      "invite": {
+        "uri": "/users/75458348/team_user_clip_access_grants",
+        "options": ["GET", "POST"]
+      },
+      "trim": {
+        "uri": "/videos/1051149880/cliptrim",
+        "options": ["GET", "POST"]
+      },
+      "validate": { "uri": "/videos/1051149880/validate", "options": ["PUT"] }
+    },
+    "is_vimeo_create": false,
+    "is_screen_record": false
+  },
+  "manage_link": "/manage/videos/1051149880",
+  "user": {
+    "uri": "/users/75458348",
+    "name": "North Country Chapel",
+    "link": "https://vimeo.com/northcountrychapel1996",
+    "capabilities": {
+      "hasLiveSubscription": true,
+      "hasEnterpriseLihp": false,
+      "hasSvvTimecodedComments": true,
+      "hasSimplifiedEnterpriseAccount": false,
+      "hasManagementCapabilitiesForComments": false,
+      "canViewSimplifiedCommentMentions": false
+    },
+    "location": "Post Falls, ID 83854, USA",
+    "gender": "n",
+    "bio": "North Country Chapel is a Calvary Chapel Outreach Fellowship located in Post Falls, Idaho.\n   \n Our services are:\n    Sunday Morning at 9:00am and 11:00am\n    Monday Evening at 7:00pm\n    Friday Evening at 7:00pm\n    \nChild care (ages: nursery to 12) is provided for Friday and Sunday services.\nHigh School meets Friday evenings @ 7:00pm.",
+    "short_bio": "North Country Chapel is a non-denominational Calvary Chapel Outreach Fellowship located in Post Falls, Idaho.",
+    "created_time": "2017-11-30T23:00:22+00:00",
+    "pictures": {
+      "uri": "/users/75458348/pictures/31617458",
+      "active": true,
+      "type": "custom",
+      "base_link": "https://i.vimeocdn.com/portrait/31617458?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1",
+      "sizes": [
+        {
+          "width": 30,
+          "height": 30,
+          "link": "https://i.vimeocdn.com/portrait/31617458_30x30?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 72,
+          "height": 72,
+          "link": "https://i.vimeocdn.com/portrait/31617458_72x72?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 75,
+          "height": 75,
+          "link": "https://i.vimeocdn.com/portrait/31617458_75x75?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "link": "https://i.vimeocdn.com/portrait/31617458_100x100?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 144,
+          "height": 144,
+          "link": "https://i.vimeocdn.com/portrait/31617458_144x144?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 216,
+          "height": 216,
+          "link": "https://i.vimeocdn.com/portrait/31617458_216x216?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 288,
+          "height": 288,
+          "link": "https://i.vimeocdn.com/portrait/31617458_288x288?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 300,
+          "height": 300,
+          "link": "https://i.vimeocdn.com/portrait/31617458_300x300?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        },
+        {
+          "width": 360,
+          "height": 360,
+          "link": "https://i.vimeocdn.com/portrait/31617458_360x360?sig=7fb617548135232691b92cce488e892f8bdafaac6747f009ab8f03ad31a45a73&v=1"
+        }
+      ],
+      "resource_key": "749737afc94f353c57e2a2af6fa1f5c305b796ff",
+      "default_picture": false
+    },
+    "websites": [
+      {
+        "uri": "/users/75458348/links/6643898",
+        "name": "Website",
+        "link": "http://northcountrychapel.com",
+        "type": "link",
+        "description": "North Country Chapel"
+      },
+      {
+        "uri": "/users/75458348/links/6643899",
+        "name": "Get the App",
+        "link": "https://subsplash.com/northcountrychapel/app",
+        "type": "link",
+        "description": "NC App"
+      }
+    ],
+    "metadata": {
+      "connections": {
+        "albums": {
+          "uri": "/users/75458348/albums",
+          "options": ["GET"],
+          "total": 0
+        },
+        "appearances": {
+          "uri": "/users/75458348/appearances",
+          "options": ["GET"],
+          "total": 0
+        },
+        "categories": {
+          "uri": "/users/75458348/categories",
+          "options": ["GET"],
+          "total": 0
+        },
+        "channels": {
+          "uri": "/users/75458348/channels",
+          "options": ["GET"],
+          "total": 0
+        },
+        "feed": { "uri": "/users/75458348/feed", "options": ["GET"] },
+        "followers": {
+          "uri": "/users/75458348/followers",
+          "options": ["GET"],
+          "total": 67
+        },
+        "following": {
+          "uri": "/users/75458348/following",
+          "options": ["GET"],
+          "total": 0
+        },
+        "groups": {
+          "uri": "/users/75458348/groups",
+          "options": ["GET"],
+          "total": 0
+        },
+        "likes": {
+          "uri": "/users/75458348/likes",
+          "options": ["GET"],
+          "total": 0
+        },
+        "membership": {
+          "uri": "/users/75458348/membership/",
+          "options": ["PATCH"]
+        },
+        "moderated_channels": {
+          "uri": "/users/75458348/channels?filter=moderated",
+          "options": ["GET"],
+          "total": 0
+        },
+        "portfolios": {
+          "uri": "/users/75458348/portfolios",
+          "options": ["GET"],
+          "total": 0
+        },
+        "videos": {
+          "uri": "/users/75458348/videos",
+          "options": ["GET"],
+          "total": 949
+        },
+        "watchlater": {
+          "uri": "/users/75458348/watchlater",
+          "options": ["GET"],
+          "total": 0
+        },
+        "shared": {
+          "uri": "/users/75458348/shared/videos",
+          "options": ["GET"],
+          "total": 0
+        },
+        "pictures": {
+          "uri": "/users/75458348/pictures",
+          "options": ["GET", "POST"],
+          "total": 2
+        },
+        "watched_videos": {
+          "uri": "/me/watched/videos",
+          "options": ["GET"],
+          "total": 0
+        },
+        "folders_root": {
+          "uri": "/users/75458348/folders/root",
+          "options": ["GET"]
+        },
+        "folders": {
+          "uri": "/users/75458348/folders",
+          "options": ["GET", "POST"],
+          "total": 39
+        },
+        "teams": {
+          "uri": "/users/75458348/teams",
+          "options": ["GET"],
+          "total": 1
+        },
+        "permission_policies": {
+          "uri": "/users/75458348/permission_policies",
+          "options": ["GET"],
+          "total": 12
+        },
+        "block": { "uri": "/me/block", "options": ["GET"], "total": 0 }
+      }
+    },
+    "location_details": {
+      "formatted_address": "Post Falls, ID 83854, USA",
+      "latitude": 47.7179565,
+      "longitude": -116.9515839,
+      "city": "Post Falls",
+      "state": "Idaho",
+      "neighborhood": null,
+      "sub_locality": null,
+      "state_iso_code": "ID",
+      "country": "United States",
+      "country_iso_code": "US"
+    },
+    "skills": [],
+    "available_for_hire": false,
+    "can_work_remotely": false,
+    "preferences": {
+      "videos": {
+        "rating": ["safe"],
+        "privacy": {
+          "view": "anybody",
+          "comments": "anybody",
+          "embed": "public",
+          "download": true,
+          "add": true,
+          "allow_share_link": true
+        }
+      },
+      "webinar_registrant_lower_watermark_banner_dismissed": []
+    },
+    "content_filter": [
+      "language",
+      "drugs",
+      "violence",
+      "nudity",
+      "safe",
+      "unrated"
+    ],
+    "upload_quota": {
+      "space": {
+        "free": 3602951079126,
+        "max": 7696581394432,
+        "used": 4093630315306,
+        "showing": "lifetime",
+        "unit": "video_size"
+      },
+      "periodic": {
+        "period": null,
+        "unit": null,
+        "free": null,
+        "max": null,
+        "used": null,
+        "reset_date": null
+      },
+      "lifetime": {
+        "unit": "video_size",
+        "free": 3602951079126,
+        "max": 7696581394432,
+        "used": 4093630315306
+      }
+    },
+    "resource_key": "4941b234dedf2a6e22f2f65edbd2b495ebda42ce",
+    "account": "custom"
+  },
+  "last_user_action_event_date": "2025-01-28T14:50:50+00:00",
+  "parent_folder": null,
+  "review_page": {
+    "active": true,
+    "link": "https://vimeo.com/northcountrychapel1996/review/1051149880/4e34526c01",
+    "is_shareable": true
+  },
+  "files": [
+    {
+      "quality": "sd",
+      "rendition": "240p",
+      "type": "video/mp4",
+      "width": 426,
+      "height": 240,
+      "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/rendition/240p/file.mp4?loc=external&oauth2_token_id=1767084142&signature=4950cce90c6c66ea8a19a00ea428e69c319c348a504eb9df8a4e1b9edcde9809",
+      "created_time": "2025-01-28T14:00:12+00:00",
+      "fps": 30,
+      "size": 209219924,
+      "md5": null,
+      "public_name": "240p",
+      "size_short": "199.53MB"
+    },
+    {
+      "quality": "hd",
+      "rendition": "1080p",
+      "type": "video/mp4",
+      "width": 1920,
+      "height": 1080,
+      "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/rendition/1080p/file.mp4?loc=external&oauth2_token_id=1767084142&signature=e5d24d0a5fdc0282cc4c4659c3279d6a86beda02a43999450a80daf95185fb97",
+      "created_time": "2025-01-28T14:01:14+00:00",
+      "fps": 30,
+      "size": 2522785718,
+      "md5": null,
+      "public_name": "1080p",
+      "size_short": "2.35GB"
+    },
+    {
+      "quality": "sd",
+      "rendition": "540p",
+      "type": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/rendition/540p/file.mp4?loc=external&oauth2_token_id=1767084142&signature=19d2c6f5266e57c2797eb8fa840a81844cc5cbe82e2e2d1fbe7d9187e008974b",
+      "created_time": "2025-01-28T14:00:13+00:00",
+      "fps": 30,
+      "size": 671571129,
+      "md5": null,
+      "public_name": "540p",
+      "size_short": "640.46MB"
+    },
+    {
+      "quality": "hd",
+      "rendition": "720p",
+      "type": "video/mp4",
+      "width": 1280,
+      "height": 720,
+      "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/rendition/720p/file.mp4?loc=external&oauth2_token_id=1767084142&signature=5df42dacb8f24f61f54b7d4e8ff15e2ad81fdf7224ff7beea0dc257ae78faf85",
+      "created_time": "2025-01-28T13:59:54+00:00",
+      "fps": 30,
+      "size": 1136322316,
+      "md5": null,
+      "public_name": "720p",
+      "size_short": "1.06GB"
+    },
+    {
+      "quality": "sd",
+      "rendition": "360p",
+      "type": "video/mp4",
+      "width": 640,
+      "height": 360,
+      "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/rendition/360p/file.mp4?loc=external&oauth2_token_id=1767084142&signature=d85b51d58b3f6cb6476a248bb6bfec1709f957280f73e31113f1552efa6e4873",
+      "created_time": "2025-01-28T13:59:45+00:00",
+      "fps": 30,
+      "size": 349217613,
+      "md5": null,
+      "public_name": "360p",
+      "size_short": "333.04MB"
+    },
+    {
+      "quality": "hls",
+      "rendition": "adaptive",
+      "type": "video/mp4",
+      "link": "https://player.vimeo.com/external/1051149880.m3u8?s=a3a5978279645502cb8dddbbb2e5396270ceed28&oauth2_token_id=1767084142",
+      "created_time": "2025-01-28T14:00:12+00:00",
+      "fps": 30,
+      "size": 209219924,
+      "md5": null,
+      "public_name": "240p",
+      "size_short": "199.53MB"
+    }
+  ],
+  "download": [
+    {
+      "quality": "hd",
+      "rendition": "720p",
+      "type": "video/mp4",
+      "width": 1280,
+      "height": 720,
+      "expires": "2025-01-29T23:50:13+00:00",
+      "link": "https://player.vimeo.com/progressive_redirect/download/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/7878ce44-c357c939/1_thessalonians_2:11-20%20%28720p%29.mp4?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=5457a55f3ec00f8c562bd2d4252a79ad5862978efbb165fd6c0688ae9e3859c5",
+      "created_time": "2025-01-28T13:59:54+00:00",
+      "fps": 30,
+      "size": 1136322316,
+      "md5": null,
+      "public_name": "720p",
+      "size_short": "1.06GB"
+    },
+    {
+      "quality": "sd",
+      "rendition": "540p",
+      "type": "video/mp4",
+      "width": 960,
+      "height": 540,
+      "expires": "2025-01-29T23:50:13+00:00",
+      "link": "https://player.vimeo.com/progressive_redirect/download/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/10386d44-c357c939/1_thessalonians_2:11-20%20%28540p%29.mp4?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=23b5af59ea49430ce8ef608f3856a36fd2325cb3e1ea7bf169fe0998044c6235",
+      "created_time": "2025-01-28T14:00:13+00:00",
+      "fps": 30,
+      "size": 671571129,
+      "md5": null,
+      "public_name": "540p",
+      "size_short": "640.46MB"
+    },
+    {
+      "quality": "sd",
+      "rendition": "240p",
+      "type": "video/mp4",
+      "width": 426,
+      "height": 240,
+      "expires": "2025-01-29T23:50:13+00:00",
+      "link": "https://player.vimeo.com/progressive_redirect/download/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/1e496407-c357c939/1_thessalonians_2:11-20%20%28240p%29.mp4?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=ace165d7f045ac86b82ccf0552048b36fa63285555f0003caab864d875675d50",
+      "created_time": "2025-01-28T14:00:12+00:00",
+      "fps": 30,
+      "size": 209219924,
+      "md5": null,
+      "public_name": "240p",
+      "size_short": "199.53MB"
+    },
+    {
+      "quality": "sd",
+      "rendition": "360p",
+      "type": "video/mp4",
+      "width": 640,
+      "height": 360,
+      "expires": "2025-01-29T23:50:13+00:00",
+      "link": "https://player.vimeo.com/progressive_redirect/download/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/7c829367-c357c939/1_thessalonians_2:11-20%20%28360p%29.mp4?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=5177d1216d5a06a76cb5843e7c603205f088b7106c215d930311455ecdbfa9d0",
+      "created_time": "2025-01-28T13:59:45+00:00",
+      "fps": 30,
+      "size": 349217613,
+      "md5": null,
+      "public_name": "360p",
+      "size_short": "333.04MB"
+    },
+    {
+      "quality": "hd",
+      "rendition": "1080p",
+      "type": "video/mp4",
+      "width": 1920,
+      "height": 1080,
+      "expires": "2025-01-29T23:50:13+00:00",
+      "link": "https://player.vimeo.com/progressive_redirect/download/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/aee591d0-c357c939/1_thessalonians_2:11-20%20%281080p%29.mp4?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=6c3d3dff5832da4413006460f9c05c27050499b4b019e9cd60a5cb93f9afe6a9",
+      "created_time": "2025-01-28T14:01:14+00:00",
+      "fps": 30,
+      "size": 2522785718,
+      "md5": null,
+      "public_name": "1080p",
+      "size_short": "2.35GB"
+    }
+  ],
+  "app": { "name": "Connect", "uri": "/apps/293113" },
+  "play": {
+    "progressive": [
+      {
+        "type": "video/mp4",
+        "codec": "H264",
+        "width": 1920,
+        "height": 1080,
+        "link_expiration_time": "2025-01-29T23:50:13+00:00",
+        "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/aee591d0-c357c939?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=689c0ea857517fd7757053f8929683fd6e19f829512a3cc33e07965e91226d30",
+        "created_time": "2025-01-28T14:01:14+00:00",
+        "fps": 30,
+        "size": 2522785718,
+        "md5": null,
+        "rendition": "1080p"
+      },
+      {
+        "type": "video/mp4",
+        "codec": "H264",
+        "width": 640,
+        "height": 360,
+        "link_expiration_time": "2025-01-29T23:50:13+00:00",
+        "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/7c829367-c357c939?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=73eff74b1cbf39a0184430ee86b17f0929d0c8be8ac4d731ef158a28444c4f1d",
+        "created_time": "2025-01-28T13:59:45+00:00",
+        "fps": 30,
+        "size": 349217613,
+        "md5": null,
+        "rendition": "360p"
+      },
+      {
+        "type": "video/mp4",
+        "codec": "H264",
+        "width": 1280,
+        "height": 720,
+        "link_expiration_time": "2025-01-29T23:50:13+00:00",
+        "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/7878ce44-c357c939?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=2e6d7be4e6edb6265fdbe72ed6597abb8e9ce189da95e46b81cf861d0bb45775",
+        "created_time": "2025-01-28T13:59:54+00:00",
+        "fps": 30,
+        "size": 1136322316,
+        "md5": null,
+        "rendition": "720p"
+      },
+      {
+        "type": "video/mp4",
+        "codec": "H264",
+        "width": 960,
+        "height": 540,
+        "link_expiration_time": "2025-01-29T23:50:13+00:00",
+        "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/10386d44-c357c939?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=f04c29f3dc7a3faa076654f7eb44ee7b6545e384556798af3cf2d732c5a17089",
+        "created_time": "2025-01-28T14:00:13+00:00",
+        "fps": 30,
+        "size": 671571129,
+        "md5": null,
+        "rendition": "540p"
+      },
+      {
+        "type": "video/mp4",
+        "codec": "H264",
+        "width": 426,
+        "height": 240,
+        "link_expiration_time": "2025-01-29T23:50:13+00:00",
+        "link": "https://player.vimeo.com/progressive_redirect/playback/1051149880/container/f6be5e63-94ec-4ede-80a3-5ebadbda6210/1e496407-c357c939?expires=1738194613&loc=external&oauth2_token_id=1767084142&signature=d7c3291026078baede9b1d34d69206dd89b406b32a8d6e91e29aab60d59d590b",
+        "created_time": "2025-01-28T14:00:12+00:00",
+        "fps": 30,
+        "size": 209219924,
+        "md5": null,
+        "rendition": "240p"
+      }
+    ],
+    "hls": {
+      "link_expiration_time": "2025-01-29T23:48:13+00:00",
+      "link": "https://player.vimeo.com/play/f6be5e63-94ec-4ede-80a3-5ebadbda6210/hls.m3u8?s=1051149880_1738194493_507482827f34f16e38f83d51f55e4d8d&context=Vimeo%5CController%5CApi%5CResources%5CVideoController.&oauth2_token_id=1767084142"
+    },
+    "dash": {
+      "link_expiration_time": "2025-01-29T23:48:13+00:00",
+      "link": "https://player.vimeo.com/play/f6be5e63-94ec-4ede-80a3-5ebadbda6210/dash.mpd?s=1051149880_1738194493_507482827f34f16e38f83d51f55e4d8d&context=Vimeo%5CController%5CApi%5CResources%5CVideoController.&oauth2_token_id=1767084142"
+    },
+    "status": "playable"
+  },
+  "status": "available",
+  "resource_key": "9ef4ecd74257ff7f80b976247359451e1119316f",
+  "upload": {
+    "status": "complete",
+    "link": null,
+    "upload_link": null,
+    "form": null,
+    "approach": null,
+    "size": null,
+    "redirect_url": null
+  },
+  "transcode": { "status": "complete" },
+  "is_playable": true,
+  "has_audio": true
+}

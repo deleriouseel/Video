@@ -1,0 +1,6 @@
+python-dotenv
+requests
+vimeo
+pymediainfo
+fuzzywuzzy
+python-Levenshtein

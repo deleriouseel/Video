@@ -4,24 +4,23 @@ This fetches info about the latest WordPress posts from the "bible study" catego
 It then tests that the audio file link exists.
 """
 
-import logging
 import requests
 import os
 import re
 from dotenv import load_dotenv
 from datetime import datetime, timezone
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
 from zoneinfo import ZoneInfo
+import boto3
+from botocore.exceptions import ClientError
+from logger import get_logger
 
 load_dotenv()
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-    filename=r"WPpost.log",
-)
+SCRIPT_NAME = "checkMainsitePost"
+
+logger = get_logger(SCRIPT_NAME, __file__)
+
+
 # WP Login stuff
 url = os.getenv("WP_API_URL")
 username = os.getenv("WP_API_USER")
@@ -33,17 +32,17 @@ headers = {
     }
 
 def getPost(url):
-    logging.info("Getting post from wordpress api")
+    logger.info("Getting post from wordpress api")
     response = requests.get(url,headers=headers)
     if response.status_code == 200:
         post = response.json()
         return post
     else:
-        logging.error(f"Error: {response.status_code} - {response.reason}")   
+        logger.error(f"Error: {response.status_code} - {response.reason}")   
 
 
 def checkWPPost():
-    logging.info("checkWPPost")
+    logger.info("checkWPPost")
     
     required_category = 2420  # Video Studies category ID
     bible_categories = [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 
@@ -55,7 +54,7 @@ def checkWPPost():
 
     posts = getPost(os.getenv("WP_API_URL") + "posts?categories=48&per_page=1")
     if not posts:
-        logging.error("Failed to retrieve posts from WordPress API")
+        logger.error("Failed to retrieve posts from WordPress API")
         return
     
     latest_post = posts[0]
@@ -67,47 +66,47 @@ def checkWPPost():
     post_date_local = post_date.astimezone(site_timezone)
     current_date_local = datetime.now(site_timezone)
 
-    logging.debug(f"Post date (Local): {post_date_local}")
-    logging.debug(f"Current date (Local): {current_date_local}")
+    logger.debug(f"Post date (Local): {post_date_local}")
+    logger.debug(f"Current date (Local): {current_date_local}")
 
     if post_date_local.date() != current_date_local.date():
-        logging.error(f"No Audio Study post found for {current_date_local.date()}")
+        logger.error(f"No Audio Study post found for {current_date_local.date()}")
         send_email(latest_post, None, None, f"No Audio Study post found for {current_date_local.date()}")
         return None
 
     is_valid, content_length, last_modified, validation_message = validate_post(latest_post, required_category, bible_categories)
 
     if is_valid:
-        logging.info("Latest post is valid.")
+        logger.info("Latest post is valid.")
         send_email(latest_post, content_length, last_modified)
         return latest_post
     else:
-        logging.info("No valid post found.")
+        logger.info("No valid post found.")
         send_email(latest_post, content_length, last_modified, validation_message)
         return None
     
 def validate_post(post, required_category, bible_categories):
-    logging.info("validate_post")
+    logger.info("validate_post")
     
     # Check if the post has the required category
     if required_category not in post['categories']:
-        logging.info("Post does not have 'Video Studies' category.")
+        logger.info("Post does not have 'Video Studies' category.")
         return False, None, None, "Post does not have 'Video Studies' category."
     
     # Check if the post has any of the bible categories
     if not any(category_id in bible_categories for category_id in post['categories']):
-        logging.info("Post does not have a required Bible book category.")
+        logger.info("Post does not have a required Bible book category.")
         return False, None, None, "Post does not have a required Bible book category."
     
     if post['status'] != 'publish':
-        logging.info("Post is not published.")
+        logger.info("Post is not published.")
         return False, None, None, "Post is not published."
     
     pattern = re.compile(r'https://media\.northcountrychapel\.com/rafiles/([a-zA-Z0-9-]+)\.mp3')
     content = post['content']['rendered']
     match = pattern.search(content)
     if not match:
-        logging.info("Post does not have an audio file link.")
+        logger.info("Post does not have an audio file link.")
         return False, None, None, "Post does not have an audio file link."
     
     audio_url = match.group(0)
@@ -122,28 +121,36 @@ def validate_post(post, required_category, bible_categories):
         if response.status_code == 200:
             content_length = response.headers.get('Content-Length')
             last_modified = response.headers.get('Last-Modified')
-            logging.info(f"Audio file exists at: {audio_url}")
+            logger.info(f"Audio file exists at: {audio_url}")
             
             if content_length:
                 content_length = int(content_length)  # Convert to an integer
-                logging.info(f"Content-Length: {content_length} bytes")
+                logger.info(f"Content-Length: {content_length} bytes")
             if last_modified:
-                logging.info(f"Last-Modified: {last_modified}")
+                logger.info(f"Last-Modified: {last_modified}")
             
         else:
-            logging.info(f"Audio file link is invalid. Status code: {response.status_code}")
+            logger.info(f"Audio file link is invalid. Status code: {response.status_code}")
             return False, None, None, "Audio file link is invalid."
     except requests.exceptions.RequestException as e:
-        logging.error(f"Error checking audio file link: {e}")
+        logger.error(f"Error checking audio file link: {e}")
         return False, None, None, f"Error checking audio file link: {e}"
     
     return True, content_length, last_modified, None
 
+
 def send_email(post, content_length, last_modified, validation_message=None):
-    logging.info("send_email")
+    logger.info("send_email")
+
+        # Add diagnostic logging
+    logger.debug(f"AWS_REGION: {os.environ.get('AWS_REGION', 'NOT SET')}")
+    logger.debug(f"EMAIL_FROM: {os.environ.get('EMAIL_FROM', 'NOT SET')}")
+    logger.debug(f"EMAIL_TO: {os.environ.get('EMAIL_TO', 'NOT SET')}")
+    logger.debug(f"AWS_ACCESS_KEY_ID: {'SET' if os.environ.get('AWS_ACCESS_KEY_ID') else 'NOT SET'}")
+    
     
     if validation_message:
-        subject = "WordPress check script found an issue"
+        subject = "WordPress Check script found an issue"
         html_content = f"""
         <html>
             <body>
@@ -156,7 +163,7 @@ def send_email(post, content_length, last_modified, validation_message=None):
         </html>
         """
     else:
-        subject = "WordPress check script ran successfully"
+        subject = "WordPress Check script ran successfully"
         html_content = f"""
         <html>
             <body>
@@ -170,18 +177,40 @@ def send_email(post, content_length, last_modified, validation_message=None):
         </html>
         """
 
-    message = Mail(
-        from_email=os.environ.get("EMAIL_FROM"),
-        to_emails=os.environ.get("EMAIL_TO"),
-        subject=subject,
-        html_content=html_content,
-    )
-
+    # Create AWS SES client
     try:
-        sg = SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-        response = sg.send(message)
-        logging.info(f"Email sent with status code: {response.status_code}")
+        ses_client = boto3.client(
+            'ses',
+            region_name=os.environ.get("AWS_REGION"),
+            aws_access_key_id=os.environ.get("AWS_ACCESS_KEY_ID"),
+            aws_secret_access_key=os.environ.get("AWS_SECRET_ACCESS_KEY")
+        )
+        
+        response = ses_client.send_email(
+            Source=os.environ.get("EMAIL_FROM"),
+            Destination={
+                'ToAddresses': [os.environ.get("EMAIL_TO")]
+            },
+            Message={
+                'Subject': {
+                    'Data': subject,
+                    'Charset': 'UTF-8'
+                },
+                'Body': {
+                    'Html': {
+                        'Data': html_content,
+                        'Charset': 'UTF-8'
+                    }
+                }
+            }
+        )
+        
+        logger.info(f"Email sent successfully. Message ID: {response['MessageId']}")
+        
+    except ClientError as e:
+        logger.error(f"Error sending email via SES: {e.response['Error']['Message']}")
     except Exception as e:
-        logging.error(f"Error sending email: {e}")
+        logger.error(f"Error sending email: {e}")
+
 
 checkWPPost()
