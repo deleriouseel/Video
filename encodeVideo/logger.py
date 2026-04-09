@@ -68,7 +68,7 @@ def get_logger(script_name: str, caller_file: str = None, log_file: str = None, 
 
     if log_file is None:
         base_dir = os.path.dirname(os.path.abspath(caller_file)) if caller_file else os.path.dirname(os.path.abspath(__file__))
-        log_file = os.path.join(base_dir, f"{script_name}_{today}.log")
+        log_file = os.path.join(base_dir, f"{script_name}.log")
 
     logger = logging.getLogger(script_name)
 

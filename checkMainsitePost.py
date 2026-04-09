@@ -84,6 +84,10 @@ def checkWPPost():
 
     if is_valid:
         logger.info("Latest post is valid.", extra=log_extra())
+        logger.info(f"Valid post found: {post_title}",
+                extra=log_extra(event_type="key_event",
+                                post_title=post_title,
+                                post_categories=post_categories))
         send_email(latest_post, content_length, last_modified)
         return latest_post
     else:

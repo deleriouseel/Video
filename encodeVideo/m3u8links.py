@@ -74,7 +74,7 @@ def get_m3u8_links():
 
             if m3u8_link:
                 logger.info(f"Found m3u8 link for '{video_title}' (ID: {video_id}): {m3u8_link}",
-                            extra=log_extra(video_id=video_id))
+                            extra=log_extra(event_type="key_event", video_title=video_title, m3u8_link=m3u8_link))
                 # Add the video info and link to our list
                 all_links.append({
                     "video_id": video_id,
@@ -85,6 +85,10 @@ def get_m3u8_links():
                 logger.warning(f"No m3u8 link found for video: {video_title}",
                                extra=log_extra(event_type="error", error_message=f"No m3u8 link found for video: {video_title}", video_id=video_id))
 
+        logger.info(f"Extracted {len(all_links)} m3u8 links",
+                    extra=log_extra(event_type="key_event",
+                                    extraction_status="success",
+                                    file_count=len(all_links)))
         # Save all links to a single file
         if all_links:
             save_links_to_file(all_links)
