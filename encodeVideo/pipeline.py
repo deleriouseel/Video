@@ -10,6 +10,7 @@ Absorbed into this script:
   01_get_driveFiles.ps1      -> step_copy (drive detection + copy)
   09_delete_desktopFiles.ps1 -> hk_delete_desktop (gated on verified archive copy)
   10_delete_driveFiles.ps1   -> hk_delete_drive (gated on completed cycles)
+  Both deletes wait until Friday (or the weekend) before running.
 
 Run as subprocesses:
   02_get_fileNames, 03_encode_video, 04_upload_video, 05_rename_vimeo, 06_update_wordpress,
@@ -86,6 +87,9 @@ COPY_NOT_BEFORE = dtime(20, 30)        # don't start copying before this on Mond
 DRIVE_DEADLINE = dtime(20, 40)         # email if nothing copied by this on Monday
 STALL_DEADLINE_DAY_OFFSET = 1          # Tuesday
 STALL_DEADLINE = dtime(9, 0)           # email if chain incomplete by this
+
+# Desktop/drive copies are kept until Friday
+DELETE_NOT_BEFORE_WEEKDAY = 4          # Friday
 
 # Subprocess steps: state key -> (script file, timeout seconds)
 SUBPROCESS_STEPS = {
@@ -715,14 +719,21 @@ def hk_delete_drive(state):
 
 def run_housekeeping(state):
     """Each housekeeping task runs at most once per day. A task returning
-    False (e.g. drive absent) is retried on later runs the same day."""
+    False (e.g. drive absent) is retried on later runs the same day.
+    The desktop/drive deletes are additionally held until Friday."""
     today = date.today().isoformat()
     tasks = [
         ("move_backup", lambda: run_step_script("move_backup")),
         ("delete_old", lambda: run_step_script("delete_old")),
-        ("delete_desktop", hk_delete_desktop),
-        ("delete_drive", lambda: hk_delete_drive(state)),
     ]
+    if date.today().weekday() >= DELETE_NOT_BEFORE_WEEKDAY:
+        tasks += [
+            ("delete_desktop", hk_delete_desktop),
+            ("delete_drive", lambda: hk_delete_drive(state)),
+        ]
+    else:
+        logger.debug("Desktop/drive deletes deferred until Friday.",
+                     extra=log_extra())
     for name, func in tasks:
         if state["housekeeping"].get(name) == today:
             continue
