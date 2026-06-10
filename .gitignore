@@ -8,3 +8,4 @@
 uploaded.txt
 pipeline_state.json
 pipeline.lock
+__pycache__/ 
