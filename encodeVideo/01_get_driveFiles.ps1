@@ -1,4 +1,4 @@
-# Gets the drive with the label "STUDIO20", searches for .mov files created on the latest Friday, Sunday, or Monday.
+# Gets the drive with a label starting with "STUDIO", searches for .mov files created on the latest Friday, Sunday, or Monday.
 # For Sunday files, copies only the earliest video that is longer than 30 minutes.
 # For Friday and Monday files, copies all videos longer than 30 minutes.
 # It logs all actions to a filename.log.
@@ -85,11 +85,11 @@ function Get-LatestDays {
 }
 
 # Find the drive with the volume label "STUDIO20"
-$movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -like "STUDIO20" }
+$movDrive = Get-Volume | Where-Object { $_.FileSystemLabel -like "STUDIO*" }
 
 if ($movDrive) {
     $driveLetter = $movDrive.DriveLetter
-    Write-Log "Drive with label 'STUDIO20' found: ${driveLetter}:"
+    Write-Log "Drive with label '$($movDrive.FileSystemLabel)' found: ${driveLetter}:"
 
     # Source path
     $sourcePath = "${driveLetter}:\" 
@@ -180,5 +180,5 @@ if ($movDrive) {
         Write-Log "No .mov files found on the drive."
     }
 } else {
-    Write-Log "No drive with label 'STUDIO20' found."
+    Write-Log "No drive with a label starting with 'STUDIO' found."
 }
